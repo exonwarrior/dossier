@@ -1,0 +1,413 @@
+/*
+App.GeneralSkills = DS.Model.extend({
+	name: DS.attr('string'),
+	description: DS.attr('string'),
+	attribute: DS.attr('string'),
+	rank: DS.attr('number'),
+	character: DS.hasMany('App.Character')
+});
+
+App.CombatSkills = DS.Model.extend({
+	name: DS.attr('string'),
+	description: DS.attr('string'),
+	attribute: DS.attr('string'),
+	rank: DS.attr('number'),
+	character: DS.hasMany('App.Character')
+});
+
+App.KnowledgeSkills = DS.Model.extend({
+	name: DS.attr('string'),
+	description: DS.attr('string'),
+	attribute: DS.attr('string'),
+	rank: DS.attr('number'),
+	character: DS.hasMany('App.Character')
+});
+
+App.CustomSkills = DS.Model.extend({
+	name: DS.attr('string'),
+	description: DS.attr('string'),
+	attribute: DS.attr('string'),
+	rank: DS.attr('number'),
+	character: DS.hasMany('App.Character')
+});
+*/ 
+
+/*
+//General Skills
+App.GeneralSkills.FIXTURES = [
+{
+	id: 0,
+	name: "Astrogation (Int)",
+	description: "",
+	attribute: "intellect"
+},
+{
+	id: 1,
+	name: "Athletics (Br)",
+	description: "",
+	attribute: "brawn"
+},
+{
+	id: 2,
+	name: "Charm (Pr)",
+	description: "",
+	attribute: "presence"
+},
+{
+	id: 3,
+	name: "Coercion (Will)",
+	description: "",
+	attribute: "willpower"
+},
+{
+	id: 4,
+	name: "Computers (Int)",
+	description: "",
+	attribute: "intellect"
+},
+{
+	id: 5,
+	name: "Cool (Pr)",
+	description: "",
+	attribute: "presence"
+},
+{
+	id: 6,
+	name: "Coordination (Ag)",
+	description: "",
+	attribute: "agility"
+},
+{
+	id: 7,
+	name: "Deception (Cun)",
+	description: "",
+	attribute: "cunning"
+},
+{
+	id: 8,
+	name: "Discipline (Will)",
+	description: "",
+	attribute: "willpower"
+},
+{
+	id: 9,
+	name: "Leadership (Pr)",
+	description: "",
+	attribute: "presence"
+},
+{
+	id: 10,
+	name: "Mechanics (Int)",
+	description: "",
+	attribute: "intellect"
+},
+{
+	id: 11,
+	name: "Medicine (Int)",
+	description: "",
+	attribute: "intellect"
+},
+{
+	id: 12,
+	name: "Negotiation (Pr)",
+	description: "",
+	attribute: "presence"
+},
+{
+	id: 13,
+	name: "Perception (Cun)",
+	description: "",
+	attribute: "cunning"
+},
+{
+	id: 14,
+	name: "Piloting - Planetary (Ag)",
+	description: "",
+	attribute: "agility"
+},
+{
+	id: 15,
+	name: "Piloting - Space (Ag)",
+	description: "",
+	attribute: "agility"
+},
+{
+	id: 16,
+	name: "Resilience (Br)",
+	description: "",
+	attribute: "brawn"
+},
+{
+	id: 17,
+	name: "Skulduggery (Cun)",
+	description: "",
+	attribute: "cunning"
+},
+{
+	id: 18,
+	name: "Stealth (Ag)",
+	description: "",
+	attribute: "agility"
+},
+{
+	id: 19,
+	name: "Streetwise (Cun)",
+	description: "",
+	attribute: "cunning"
+},
+{
+	id: 20,
+	name: "Survival (Cun)",
+	description: "",
+	attribute: "cunning"
+},
+{
+	id: 21,
+	name: "Vigilance (Will)",
+	description: "",
+	attribute: "willpower"
+}];
+
+//Combat skills
+App.CombatSkills.FIXTURES = [
+{
+	id: 0,
+	name: "Brawl (Br)",
+	description: "",
+	attribute: "brawn"
+},
+{
+	id: 1,
+	name: "Gunnery (Ag)",
+	description: "",
+	attribute: "agility"
+},
+{
+	id: 2,
+	name: "Melee (Br)",
+	description: "",
+	attribute: "brawn"
+},
+{
+	id: 3,
+	name: "Ranged - Light (Ag)",
+	description: "",
+	attribute: "agility"
+},
+{
+	id: 4,
+	name: "Ranged - Heavy (Ag)",
+	description: "",
+	attribute: "agility"
+}
+];
+
+
+//Knowledge Skills
+App.KnowledgeSkills.FIXTURES = [
+{
+	id: 0,
+	name: "Core Worlds (Int)",
+	description: "",
+	attribute: "agility"
+},
+{
+	id: 1,
+	name: "Education (Int)",
+	description: "",
+	attribute: "agility"
+},
+{
+	id: 2,
+	name: "Lore (Int)",
+	description: "",
+	attribute: "agility"
+},
+{
+	id: 3,
+	name: "Outer Rim (Int)",
+	description: "",
+	attribute: "agility"
+},
+{
+	id: 4,
+	name: "Underworld (Int)",
+	description: "",
+	attribute: "agility"
+},
+{
+	id: 5,
+	name: "Xenology (Int)",
+	description: "",
+	attribute: "agility"
+}];
+*/
+
+skills: {
+		general: [{
+			name: "Astrogation (Int)",
+			description: "",
+			attribute: "intellect",
+		},
+		{
+			name: "Athletics (Br)",
+			description: "",
+			attribute: "brawn"
+		},
+		{
+			name: "Charm (Pr)",
+			description: "",
+			attribute: "presence"
+		},
+		{
+			name: "Coercion (Will)",
+			description: "",
+			attribute: "willpower"
+		},
+		{
+			name: "Computers (Int)",
+			description: "",
+			attribute: "intellect"
+		},
+		{
+			name: "Cool (Pr)",
+			description: "",
+			attribute: "presence"
+		},
+		{
+			name: "Coordination (Ag)",
+			description: "",
+			attribute: "agility"
+		},
+		{
+			name: "Deception (Cun)",
+			description: "",
+			attribute: "cunning"
+		},
+		{
+			name: "Discipline (Will)",
+			description: "",
+			attribute: "willpower"
+		},
+		{
+			name: "Leadership (Pr)",
+			description: "",
+			attribute: "presence"
+		},
+		{
+			name: "Mechanics (Int)",
+			description: "",
+			attribute: "intellect"
+		},
+		{
+			name: "Medicine (Int)",
+			description: "",
+			attribute: "intellect"
+		},
+		{
+			name: "Negotiation (Pr)",
+			description: "",
+			attribute: "presence"
+		},
+		{
+			name: "Perception (Cun)",
+			description: "",
+			attribute: "cunning"
+		},
+		{
+			name: "Piloting - Planetary (Ag)",
+			description: "",
+			attribute: "agility"
+		},
+		{
+			name: "Piloting - Space (Ag)",
+			description: "",
+			attribute: "agility"
+		},
+		{
+			name: "Resilience (Br)",
+			description: "",
+			attribute: "brawn"
+		},
+		{
+			name: "Skulduggery (Cun)",
+			description: "",
+			attribute: "cunning"
+		},
+		{
+			name: "Stealth (Ag)",
+			description: "",
+			attribute: "agility"
+		},
+		{
+			name: "Streetwise (Cun)",
+			description: "",
+			attribute: "cunning"
+		},
+		{
+			name: "Survival (Cun)",
+			description: "",
+			attribute: "cunning"
+		},
+		{
+			name: "Vigilance (Will)",
+			description: "",
+			attribute: "willpower"
+		}],
+		combat: [{
+			name: "Brawl (Br)",
+			description: "",
+			attribute: "brawn"
+		},
+		{
+			name: "Gunnery (Ag)",
+			description: "",
+			attribute: "agility"
+		},
+		{
+			name: "Melee (Br)",
+			description: "",
+			attribute: "brawn"
+		},
+		{
+			name: "Ranged - Light (Ag)",
+			description: "",
+			attribute: "agility"
+		},
+		{
+			name: "Ranged - Heavy (Ag)",
+			description: "",
+			attribute: "agility"
+		}],
+		knowledge: [{
+			name: "Core Worlds (Int)",
+			description: "",
+			attribute: "agility"
+		},
+		{
+			name: "Education (Int)",
+			description: "",
+			attribute: "agility"
+		},
+		{
+			name: "Lore (Int)",
+			description: "",
+			attribute: "agility"
+		},
+		{
+			name: "Outer Rim (Int)",
+			description: "",
+			attribute: "agility"
+		},
+		{
+			name: "Underworld (Int)",
+			description: "",
+			attribute: "agility"
+		},
+		{
+			name: "Xenology (Int)",
+			description: "",
+			attribute: "agility"
+		}],
+		custom: []
+	}

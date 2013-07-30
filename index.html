@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Ember Starter Kit</title>
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/stylePlain.css">
+  <script src="//use.edgefonts.net/advent-pro.js"></script>
+</head>
+<body>
+  <script type="text/x-handlebars" data-template-name="application">
+    {{ outlet }}
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="characters">
+    <!--<span style="font-size: 7pt;">charactersTemplate</span><br>-->
+    <div class="characterList">
+      {{#each character in controller}}
+        {{#linkTo "character" character}}{{ character.name }}  {{/linkTo}}<br>
+      {{/each}}
+    </div>
+    {{ outlet }}
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="character">
+    <!--<span style="font-size: 7pt;">characterTemplate</span><br>-->
+    <div class="character">
+      {{partial "header"}}
+      <div class="characterStats">
+        {{partial currentStats}}     
+      </div> 
+      <div class="characterCharacteristics">
+        <div class="characteristicBox">
+          <div class="characteristicValue">{{brawn}}</div>
+          <div class="characteristicLabel">Brawn</div>
+        </div>
+        <div class="characteristicBox">
+          <div class="characteristicValue">{{agility}}</div>
+          <div class="characteristicLabel">Agility</div>
+        </div>
+        <div class="characteristicBox">
+          <div class="characteristicValue">{{intellect}}</div>
+          <div class="characteristicLabel">Intellect</div>
+        </div>
+        <div class="characteristicBox">
+          <div class="characteristicValue">{{cunning}}</div>
+          <div class="characteristicLabel">Cunning</div>
+        </div>
+        <div class="characteristicBox">
+          <div class="characteristicValue">{{willpower}}</div>
+          <div class="characteristicLabel">Willpower</div>
+        </div>
+        <div class="characteristicBox">
+          <div class="characteristicValue">{{presence}}</div>
+          <div class="characteristicLabel">Presence</div>
+        </div>
+      </div>
+      <div class="characterSkills">
+        <h1>Skills</h1>
+        <div class="characterGeneralSkills contentBlock">
+          {{partial generalSkills}}
+        </div>
+        <div class="characterOtherSkills contentBlock">
+          {{partial combatSkills}}
+          {{partial knowledgeSkills}}
+        </div>
+      </div>
+      <div class="characterWeapons">
+        <h1>Weapons [+]</h1>
+        <div class="contentBlock">
+          <table class="">
+            <thead>
+              <tr>
+                <td class="col1">Weapon</td>
+                <td class="col2">Skill</td>
+                <td class="col3">Damage</td>
+                <td class="col4">Range</td>
+                <td class="col5">Crit</td>
+                <td class="col6">Special</td>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each item in weapons}}
+              <tr>
+                <td class="col1">{{item.name}}</td>
+                <td class="col2">{{item.skill}}</td>
+                <td class="col3">{{item.damage}}</td>
+                <td class="col4">{{item.range}}</td>
+                <td class="col5">{{item.crit}}</td> 
+                <td class="col6">{{item.special}}</td>
+              </tr>
+              {{/each}}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="characterEquipment">
+        <div class="characterArmor twoUp">
+          <h1>Armor [+]</h1>
+          <div class="contentBlock">
+            <table>
+              <thead>
+                <tr>
+                  <td class="col1">Name</td>
+                  <td class="col2">Stats</td>
+                </tr>
+              </thead>
+              <tbody>
+                {{#each item in armor}}
+                <tr>
+                  <td class="itemName col1">{{item.name}}</td>
+                  <td class="armorStats col2">{{item.stats}}</td>
+                </tr>   
+                {{/each}} 
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="characterInventory twoUp">
+          <h1>Inventory [+]</h1>
+          <div class="contentBlock">
+            <table>
+              <thead>
+                <tr>
+                  <td class="col1">Name</td>
+                  <td class="col2">Description</td>
+                </tr>
+              </thead>
+              <tbody>
+                {{#each item in inventory}}
+                <tr>
+                  <td class="itemName col1">{{item.name}}</td>
+                  <td class="itemStats col2">{{item.description}}</td>
+                </tr>   
+                {{/each}}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="characterMiscInfo">
+        <div class="characterCritInjuries twoUp">
+          <h1>Critical Injuries [+]</h1>
+          <div class="contentBlock">
+            <table>
+              <thead>
+                <tr>
+                  <td class="col1">Injury</td>
+                  <td class="col2">Severity</td>
+                  <td class="col3">Result</td>
+                </tr>
+              </thead>
+              <tbody>
+                {{#each injury in criticalInjuries}}
+                <tr>
+                  <td class="col1">{{injury.name}}</td>
+                  <td class="col2">{{injury.severity}}</td>
+                  <td class="col3">{{injury.result}}</td>
+                </tr>
+                {{/each}}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="characterXP twoUp">
+          <h1>XP</h1>
+          <div class="contentBlock">
+            <table>
+              <thead>
+                <tr>
+                  <td class="col1">Source</td>
+                  <td class="col2">Amount</td>
+                </tr>
+              </thead>
+              <tbody>
+                {{#each xp in xp}}
+                <tr>
+                  <td class="col1">{{xp.source}}</td>
+                  <td class="col2">{{xp.amount}}</td>
+                </tr>
+                {{/each}}
+                 <tr>
+                  <td class="col1"><strong>Total XP</strong></td>
+                  <td class="col2"><strong>{{totalXP}}</strong></td> 
+                </tr>
+                <tr>
+                  <td class="col1"><strong>Available XP</strong></td>
+                  <td class="col2"><strong>{{availableXP}}</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="characterMotivation twoUp">
+          <h1>Motivations [+]</h1>
+          <table>
+            <tbody>
+              {{#each item in motivation}}
+              <tr>
+                <td class="col1">{{item.name}}</td>
+                <td class="col2">{{item.description}}</td>
+              </tr>
+              {{/each}}
+            </tbody>
+          </table>
+        </div>
+        <div class="characterObligation twoUp">
+          <h1>Obligation [+]</h1>
+          <div class="contentBlock">
+            <table>
+              <thead>
+                <tr>
+                  <td class="col1">Type</td>
+                  <td class="col2">Magnitude</td>
+                  <td class="col3">Details</td>
+                </tr>
+              </thead>
+              <tbody>
+                {{#each item in obligation}}
+                <tr>
+                  <td class="col1">{{item.type}}</td>
+                  <td class="col2">{{item.magnitude}}</td>
+                  <td>{{item.details}}</td>
+                </tr>
+                {{/each}}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="_currentStats">
+    <h1>Current Stats</h1>
+    <div class="statBox dual">
+      <div class="row statRow">
+        <div class="statLeft current">{{woundsCurrent}}<div class="statBoxLabel">[-] Current [+]</div></div><div class="statRight threshold">{{woundsThreshold}}<div class="statBoxLabel">Threshold</div></div>
+      </div>
+      <div class="statRow">
+        <div class="statLabel">Wounds</div>
+      </div>
+    </div>
+    <div class="statBox dual">
+      <div class="row statRow">
+        <div class="statLeft current">{{strainCurrent}}<div class="statBoxLabel">[-] Current [+]</div></div><div class="statRight threshold">{{strainThreshold}}<div class="statBoxLabel">Threshold</div></div>
+      </div>
+      <div class="statRow">
+        <div class="statLabel">Strain</div>
+      </div>
+    </div>
+    <div class="statBox dual">
+      <div class="row statRow">
+        <div class="statLeft ranged">{{defenseRanged}}<div class="statBoxLabel">Ranged</div></div><div class="statRight melee">{{defenseMelee}}<div class="statBoxLabel">Melee</div></div>
+      </div>
+      <div class="statRow">
+        <div class="statLabel">Defense</div>
+      </div>
+    </div>
+    <div class="statBox solo">
+      <div class="row statRow">
+        <div class="statLeft">{{soak}}<div class="statBoxLabel">&nbsp;</div></div>
+      </div>
+      <div class="statRow">
+        <div class="statLabel">Soak</div>
+      </div>
+    </div>
+    <div class="statBox solo">
+      <div class="row statRow">
+        <div class="statLeft">{{dice boostSetbackDice}}<div class="statBoxLabel">&nbsp;</div></div>
+      </div>
+      <div class="statRow">
+        <div class="statLabel">Boost/Setback</div>
+      </div>
+    </div>
+  </script> 
+
+  <script type="text/x-handlebars" data-template-name="_header">
+    <header class="characterInfo">
+      <table class="inlineBlock">
+        <tbody>
+          <tr>
+            <td class="fieldLabel col1">Species</td>
+            <td class="field col2">{{species}}</td>
+          </tr>
+          <tr>
+            <td class="fieldLabel col1">Career</td>
+            <td class="field col2">{{career}}</td>
+          </tr>
+          <tr>
+            <td class="fieldLabel col1">Gender</td>
+            <td class="field col2">{{gender}}</td>
+          </tr>
+          <tr>
+            <td class="fieldLabel col1">Age</td>
+            <td class="field col2">{{age}}</td>
+          </tr>
+          <tr>
+            <td class="fieldLabel col1">Height</td>
+            <td class="field col2">{{height}}cm</td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="inlineBlock">
+        <tbody>
+          <tr>
+            <td class="fieldLabel col1">Hair</td>
+            <td class="field col2">{{hair}}</td>
+          </tr>
+          <tr>
+            <td class="fieldLabel col1">Eyes</td>
+            <td class="field col2">{{eyes}}</td>
+          </tr>
+          <tr>
+            <td class="fieldLabel col1">Notable Features</td>
+            <td class="field col2">{{notableFeatures}}</td>
+          </tr>
+          <tr>
+            <td class="fieldLabel col1">Build</td>
+            <td class="field col2">{{build}}</td>
+          </tr>
+          <tr>
+            <td class="fieldLabel col1">Player</td>
+            <td class="field col2">{{playerName}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="characterBadge inlineBlock">
+        <img {{bindAttr src="portraitURL"}} alt="" class=""><h1 class="">{{name}}</h1>
+      </div>
+    </header>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="_generalSkills">
+    <h2>General Skills</h2>
+    <table class="">
+      <thead>
+        <tr>
+          <td class="col1">Skill</td>
+          <td class="col2">Rank</td>
+          <td class="col3">Dice Pool</td>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each rank in generalSkills}}
+          {{control "rank" rank}}
+        {{/each}}
+      </tbody>
+    </table>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="rank">
+    <tr><td class="col1">{{skill.name}}</td><td class="col2">{{rank.rank}}</td><td class="col3">{{dice dicePool}}</td></tr>
+  </script>
+
+ <script type="text/x-handlebars" data-template-name="_combatSkills">
+    <h2>Combat Skills</h2>
+    <table class="">
+     <thead>
+       <tr>
+         <td class="col1">Skill</td>
+         <td class="col2">Rank</td>
+         <td class="col3">Dice Pool</td>
+       </tr>
+     </thead>
+     <tbody>
+        {{#each rank in combatSkills}}
+          {{control "rank" rank}}
+        {{/each}}
+     </tbody>
+    </table>
+  </script>
+  <script type="text/x-handlebars" data-template-name="_knowledgeSkills">
+    <h2>Knowledge Skills</h2>
+    <table class="">
+      <thead>
+       <tr>
+         <td class="col1">Skill</td>
+         <td class="col2">Rank</td>
+         <td class="col3">Dice Pool</td>
+       </tr>
+     </thead>
+     <tbody>
+        {{#each rank in knowledgeSkills}}
+         {{control "rank" rank}}
+        {{/each}}
+     </tbody>
+    </table>
+    <h2>Custom Skills [+]</h2>
+    <table class="">
+      <thead>
+       <tr>
+         <td class="col1">Skill</td>
+         <td class="col2">Rank</td>
+       </tr>
+     </thead>
+     <tbody>
+       {{#each item in customSkills}}
+       <tr><td class="col1">{{item.skill.name}}</td><td class="col2">{{item.rank}}</td><td class="col3">{{item.dicePool}}</td></tr>
+       {{/each}}
+     </tbody>
+    </table>
+  </script>
+
+    <!--
+    <div class="campaign span12">
+      <section class="group">
+        <section class="characters">                  
+        </section>
+        <section class="baseOfOperations"></section>
+        <section class="groupObligation"></section>
+        <section class="groupResources">
+          <section class="groupContacts"></section>
+          <section class="groupPosessions"></section>
+        </section>
+        <section class="groupDestinyPool"></section>
+      </section>
+      <section class="vehicle"></section>
+      <section class="notes"></section>
+    </div>
+    -->
+  <script type='application/javascript'>
+      ENV = {
+          EXPERIMENTAL_CONTROL_HELPER: true
+      };
+  </script>
+  <script src="js/libs/jquery-1.9.1.js"></script>
+  <script src="js/libs/handlebars-1.0.0-rc.4.js"></script>
+  <script src="js/libs/ember-1.0.0-rc.6.js"></script>
+  <script src="js/libs/ember-data-0.13.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/router.js"></script>
+  <script src="js/charSheet.js"></script>
+
+
+</body>
+</html>

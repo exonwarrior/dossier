@@ -1,0 +1,316 @@
+html, body{
+	font-family: advent-pro, sans-serif;
+}
+
+h1{
+	margin: 0 0 3px;
+	border-bottom: 2px solid #666;
+	text-align: left;
+}
+
+h2{
+	margin: 0;
+}
+
+img.die{
+	height: 16px;
+	margin: auto 3px;
+}
+
+.statBox img.die{
+	height: 24px;
+	box-shadow: 0 2px 5px 0 rgba(0,0,0,0.25);
+}
+.inlineBlock{
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.character{
+	width: 1180px;
+	margin: 0 auto;
+}
+
+.characterList{
+	position: absolute;
+	top: 350px;
+	left; 0;
+}
+
+.characterList .active{
+	background-color: #333;
+	color: #eee;
+}
+
+.character>div{
+	margin: 15px 0;
+}
+
+.characterInfo{
+	width: 100%;
+	height: 200px;
+	border-radius: 0 0 30px 30px;
+	overflow: hidden;
+	text-align: left;
+	position: relative;
+	color: #eee;
+	background-color: #333;
+}
+
+.characterInfo .characterBadge{
+	height: 100%;
+	position: absolute;
+	right: 0;
+	top: 0;
+	border-left: 4px solid #aaa;
+	border-radius: 0 0 30px 0;
+	overflow: hidden;
+}
+
+
+
+.characterInfo .characterBadge h1{
+	position: relative;
+	bottom: 60px;
+	padding: 3px 0 10px;
+	text-align: center;
+	background-color: #333;
+	color: #b2e6ff;
+	font-size: 28pt;
+} 
+
+.characterInfo .characterBadge img{
+	height: 100%;
+}
+
+.characterInfo table{
+	width: calc(45% - 100px);
+	vertical-align: middle;
+	margin: 10px 20px;
+	min-width: 200px;
+
+}
+
+.characterInfo table tr{
+	width: 100%;
+}
+
+.characterInfo table tr td{
+	border-top: 1px solid #888;
+	border-bottom: 0;
+}
+
+.characterInfo table td.col1{
+	text-align: left;
+}
+
+.characterInfo table tr td.fieldLabel{
+	width: 100%;
+	color: #aaa;
+}
+
+.characterInfo table tr td.field{
+	text-align: center;
+	padding: 0 10px;
+	font-size: 22pt;
+	font-weight: bold;
+}
+
+.character div.twoUp{
+	width: calc(50% - 22px);
+	display: inline-block;
+	vertical-align: top;
+	margin-bottom: 10px;
+}
+
+.character div.twoUp:nth-child(even){
+	margin-left: 20px;
+}
+
+.character>div.characterCharacteristics{
+	width: 100%;
+	text-align: center;
+	margin: 10px 0 0px;
+}
+
+.characterCharacteristics .characteristicBox{
+	display: inline-block;
+	width: 120px;
+	margin: 0 10px;
+}
+
+.characterCharacteristics .characteristicBox .characteristicValue{
+	font-weight: bold;
+	font-size: 38pt;
+	color: #333;
+	border-radius: 50%;
+	border: 6px solid #9e0017;
+	width: 60px;
+	height: 60px;
+	padding: 10px;
+	margin: 0 auto;
+	line-height: 60px;
+}
+
+.characterCharacteristics .characteristicBox .characteristicLabel{
+	background-color: #333;
+	color: #eee;
+	display: inline-block;
+	position: relative;
+	top: -20px;
+	padding: 5px;
+	border-radius: 10px;
+	border:2px solid #9e0017;
+	width: 80px;
+}
+/*
+characteristicBox">
+          <div class="characteristicValue">3</div>
+          <div class="characteristicLabel
+*/
+.characterStats{
+	width: 100%;
+	text-align: center;
+	display: inline-block;
+	vertical-align: top;
+}
+
+.statBox{
+	display: inline-block;
+	border-radius: 20px 20px;
+	overflow: hidden;
+	margin: 3px 0;
+	width: calc(20% - 6px);
+}
+
+.statRow{
+	text-align: center;
+	background-color: #ccc;
+}
+
+.statRow div{
+	display: inline-block;
+	text-align: center;
+}
+
+.statLeft, .statRight{
+	width: 50%;
+	font-size: 22pt;
+	font-weight: bold;
+	background-color: #ccc;
+}
+
+.statBox.solo .statLeft{
+	width: 100%;
+}
+
+.threshold{
+	background-color: #770000;
+	color: #eee;
+}
+
+.current{
+	background-color: #007700;
+	color: #eee;
+}
+
+.melee{
+	background-color: #000077;
+	color: #eee;
+}
+
+.ranged{
+	background-color: #db7800;
+	color: #eee;
+}
+
+.statLabel{
+	background-color: #666;
+	width: 100%;
+	color: #eee;
+}
+
+.statRow div.statBoxLabel{
+	background-color: rgba(0,0,0,0.6);
+	font-size: 10pt;
+	display: block;
+	font-weight: 100;
+	width: 100%;
+}
+
+.characterEquipment{
+	display: inline-block;
+	vertical-align: top;
+	width: 1180px;
+}
+
+.characterWeapons{
+	margin-right: 10px;
+}
+
+.characterEquipment>div{
+	width: 470px;
+	display: inline-block;
+	margin-bottom: 20px;
+}
+
+table{
+	width: 100%;
+}
+
+.characterEquipment table>tr>td.col1{
+	width: 75%;
+}
+
+table td.col1{
+	width: 75%;
+	text-align: left;
+}
+
+table thead{
+	font-weight: bold;
+	background-color: #333;
+	color: #eee;
+}
+
+
+table .col2{
+	
+}
+
+table>tbody>tr:hover td{
+	background-color: #eee;
+	color: #333 !important;
+}
+
+
+table tr td{
+	border-bottom: 1px solid #eee;
+	text-align: center;
+}
+
+.characterSkills>div{
+	width: calc(50% - 22px);
+	display: inline-block;
+	vertical-align: top;
+}
+
+.contentBlock{
+	margin: 0 10px;
+}
+
+.characterSkills table{
+	width: 100%;
+}
+
+.characterSkills h2{
+	margin-top: 20px;
+}
+
+.characterSkills table td.col1{
+	width: 60%;
+}
+
+.characterMiscInfo .col1{
+	width: 25%;
+}
