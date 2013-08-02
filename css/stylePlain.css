@@ -31,10 +31,14 @@ img.die{
 	margin: 0 auto;
 }
 
+.character.editing{
+	background: #fff0f0;
+}
+
 .characterList{
 	position: absolute;
 	top: 350px;
-	left; 0;
+	left: 0;
 }
 
 .characterList .active{
@@ -59,6 +63,7 @@ img.die{
 
 .characterInfo .characterBadge{
 	height: 100%;
+	width: 200px;
 	position: absolute;
 	right: 0;
 	top: 0;
@@ -70,13 +75,15 @@ img.die{
 
 
 .characterInfo .characterBadge h1{
-	position: relative;
-	bottom: 60px;
+	position: absolute;
+	bottom: 0;
 	padding: 3px 0 10px;
 	text-align: center;
-	background-color: #333;
+	background-color: rgba(0,0,0,0.75);
 	color: #b2e6ff;
 	font-size: 28pt;
+	width: 100%;
+	margin: 0;
 } 
 
 .characterInfo .characterBadge img{
@@ -84,10 +91,11 @@ img.die{
 }
 
 .characterInfo table{
-	width: calc(45% - 100px);
+	width: 445px;
 	vertical-align: middle;
 	margin: 10px 20px;
 	min-width: 200px;
+	border-spacing: 0 !important;
 
 }
 
@@ -110,10 +118,42 @@ img.die{
 }
 
 .characterInfo table tr td.field{
-	text-align: center;
+	text-align: right;
 	padding: 0 10px;
 	font-size: 22pt;
 	font-weight: bold;
+}
+
+.character.editing .characterInfo table tr td.field {
+	padding: 0;
+}
+
+.character.editing .characterInfo td.field input {
+	font-size: 16pt;
+	height: 100%;
+	text-align: right;
+	background: #444;
+	border: 0;
+	color: #ddd;
+	position: relative;
+	top: -2px;
+	padding: 0 10px;
+	margin: 0;
+	font-weight: bold;
+}
+
+.character.editing .characterInfo .characterBadge input{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	font-size: 28pt;
+	padding: 3px 0 10px;
+	color: #ddd;
+	font-weight: bold;
+	background: rgba(0,0,0,0.75);
+	border: 0;
+	width: 100%;
+	text-align: center;
 }
 
 .character div.twoUp{
@@ -152,6 +192,21 @@ img.die{
 	line-height: 60px;
 }
 
+.character.editing .characterCharacteristics .characteristicBox .characteristicValue input{
+	width: 100%;
+	height: 100%;
+	border: 0;
+	margin: 0;
+	padding: 5px;
+	position: relative;
+	left: -5px;
+	top: -5px;
+	background: rgba(0,0,0,0.2);
+	border-radius: 50%;
+	text-align: center;
+	font-weight: bold;
+}
+
 .characterCharacteristics .characteristicBox .characteristicLabel{
 	background-color: #333;
 	color: #eee;
@@ -163,11 +218,7 @@ img.die{
 	border:2px solid #9e0017;
 	width: 80px;
 }
-/*
-characteristicBox">
-          <div class="characteristicValue">3</div>
-          <div class="characteristicLabel
-*/
+
 .characterStats{
 	width: 100%;
 	text-align: center;
@@ -186,6 +237,11 @@ characteristicBox">
 .statRow{
 	text-align: center;
 	background-color: #ccc;
+	height: 52px;
+}
+
+.statRow.bottom{
+	height: auto;
 }
 
 .statRow div{
@@ -230,12 +286,22 @@ characteristicBox">
 	color: #eee;
 }
 
+.setbackDice{
+	color: #333;
+	text-shadow: 0 0 2px rgba(255, 255, 255, 1), 0 0 2px rgba(255, 255, 255, 1);
+}
+
+.boostDice{
+	color: #63cbff;
+}
+
 .statRow div.statBoxLabel{
 	background-color: rgba(0,0,0,0.6);
 	font-size: 10pt;
 	display: block;
 	font-weight: 100;
 	width: 100%;
+	color: #eee;
 }
 
 .characterEquipment{

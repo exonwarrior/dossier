@@ -20,6 +20,133 @@ App.IndexRoute = Ember.Route.extend({
 	}
 });
 
+App.CharactersController = Ember.ArrayController.extend({
+	createCharacter: function(){
+		var character = App.Character.createRecord({
+			isEditing: true,
+			species: "<species>",
+			career: "<career>",
+			gender: "<gender>",
+			age: "<age>",
+			height: "<height>",
+			hair: "<hair>",
+			eyes: "<eyes>",
+			notableFeatures: "<features>",
+			build: "<build>",
+			playerName: "<player>",
+			name: "<name>",
+			woundsCurrent: 0,
+			woundsThreshold: 0,
+			strainCurrent: 0,
+			strainThreshold: 0,
+			defenseMelee: 0,
+			defenseRanged: 0,
+			soak: 0,
+			boostSetbackDice: "",
+			brawn: 1,
+			agility: 1,
+			intellect: 1,
+			cunning: 1,
+			willpower: 1,
+			presence: 1,
+			portraitURL: "http://placekitten.com/200/200",
+			skills: [],
+			generalSkills: [],
+			combatSkills: [],
+			knowledgeSkills:  [],
+			customSkills: [],
+			inventory: [],
+			weapons: [],
+			armor: [],
+			criticalInjuries: [],
+			xp: [],
+			availableXP: 0,
+			motivation: [],
+			obligation: []
+		});
+		character.save();	
+	}
+});
+
+
+App.CharacterController = Ember.ObjectController.extend({
+	totalXP: function(){
+		return this.get('xp').getEach('amount').reduce(function(accum,item) {
+			return accum + item;
+		},0);
+	}.property('xp.@each.amount'),
+
+	editCharacter: function(){
+		this.set('isEditing', true);
+	},
+	saveCharacter: function(){
+		this.set('isEditing', false);
+		this.get('model').save();
+	},
+	deleteCharacter: function(){
+		var character = this.get('model');
+		character.deleteRecord();
+		character.save();
+		this.transitionToRoute('characters');
+		//alert("This is kind of broken");
+	},
+	baseSoak: function(){
+		return this.get('brawn');
+	}.property('brawn'),
+	currentSoak: function(){
+		return parseInt(this.get('baseSoak')) + parseInt(this.get('soakMod'));
+	}.property('baseSoak', 'soakMod'),
+	soakMod: 0,
+	addToSoak: function(amount){
+		var newSoakMod = this.get('soakMod') + amount;
+		if(newSoakMod == 0){
+			this.set('soakModded', false);
+		}
+		else if(newSoakMod < 0){
+			this.set('soakModded', true);
+			this.set('soakModdedPref', '');
+		}
+		else{
+			this.set('soakModded', true);
+			this.set('soakModdedPref', '+');
+		}
+		this.set('soakMod', newSoakMod);
+	},
+	addDice: function(amount, type){
+		var current = this.get('boostSetbackDice');
+		var newCurrent = "";
+		if(amount > 0){
+			for(var i = 0; i < amount; i++){
+				//find the first instance of this letter
+				var index = current.indexOf(type);
+				if(index == -1){
+					index = 0;
+				}
+				//split the string into two parts, before that letter, and after that letter (including that letter)
+				var firstPart = current.substr(0, index);
+				var secondPart = current.substr(index);
+				//insert the new letter between
+				newCurrent = firstPart + type + secondPart;
+			}
+		}
+		else if(amount < 0){
+			for(var i = 0; i > amount; i--){
+				//find and replace one instance of the character
+				newCurrent = current.replace(new RegExp(type), '');
+			}
+		}
+		this.set('boostSetbackDice', newCurrent);
+	},
+	addToStat: function(stat, amount){
+		var current = this.get(stat);
+		var newValue = current + amount;
+		this.set(stat, newValue);
+	},
+	increaseRank: function(skill, amount){
+
+	}
+});
+
 Ember.Handlebars.helper('dice',function(value,options) {
 	var string = "";
 	var diceURLs = {
@@ -31,12 +158,18 @@ Ember.Handlebars.helper('dice',function(value,options) {
 		s : "img/dice/setbackDie.png",
 		f : "img/dice/forceDie.png"
 	};
-	var array = value.split("");
-	for(var i = 0; i < array.length; i++){
-		var item = array[i];
-		array[i] = "<img src='"+ diceURLs[item] +"' class='die'>";
+	try{
+		var array = value.split("");
+			for(var i = 0; i < array.length; i++){
+			var item = array[i];
+			array[i] = "<img src='"+ diceURLs[item] +"' class='die'>";
+		}
+		return new Handlebars.SafeString('<span class="dicePool">'+array.join("")+'</span>');
 	}
-	return new Handlebars.SafeString('<span class="dicePool">'+array.join("")+'</span>');
+	catch(err){
+		return "";
+	}
+	
 });
 
 App.RankController = Ember.ObjectController.extend({
@@ -59,14 +192,6 @@ App.RankController = Ember.ObjectController.extend({
 	}.property('rank','skill.characteristic','char.cunning', 'char.brawn', 'char.agility', 'char.intellect', 'char.willpower', 'char.presence')
 });
 
-App.CharacterController = Ember.ObjectController.extend({
-	totalXP: function(){
-		return this.get('xp').getEach('amount').reduce(function(accum,item) {
-			return accum + item;
-		},0);
-	}.property('xp.@each.amount')
-});
-
 
 App.Store = DS.Store.extend({
 	revision: 13,
@@ -84,8 +209,9 @@ App.Skill = DS.Model.extend({
 App.Rank = DS.Model.extend({
 	rank: DS.attr('number'),
 	skill: DS.belongsTo('App.Skill'),
-	character: DS.belongsTo('App.Character'),
+	character: DS.belongsTo('App.Character', {inverse: 'skills'}),
 	type: DS.belongsTo('App.SkillTypes'),
+	/*weapons: DS.hasMany('App.Weapon')*/
 });
 
 App.InventoryItem = DS.Model.extend({
@@ -96,7 +222,8 @@ App.InventoryItem = DS.Model.extend({
 
 App.Weapon = DS.Model.extend({
 	name: DS.attr('string'),
-	skill: DS.attr('number'),
+	//skill: DS.hasMany('rank'),
+	skill: '1',
 	damage: DS.attr('number'),
 	range: DS.attr('number'),
 	crit: DS.attr('number'),
@@ -155,7 +282,6 @@ App.Character = DS.Model.extend({
   strainThreshold: DS.attr('number'),
   defenseMelee: DS.attr('number'),
   defenseRanged: DS.attr('number'),
-  soak: DS.attr('number'),
   boostSetbackDice: DS.attr('string'),
   brawn: DS.attr('number'),
   agility: DS.attr('number'),
@@ -179,7 +305,9 @@ App.Character = DS.Model.extend({
   obligation: DS.hasMany('App.Obligation')
 });
 
-App.skillList = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32];
+App.skillList = function(){
+	App.Skill.find().getEach('id');
+	}
 App.generalSkillList = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21];
 App.combatSkillList = [22,23,24,25,26];
 App.knowledgeSkillList = [27,28,29,30,31,32];
@@ -194,12 +322,12 @@ App.InventoryItem.FIXTURES = [{
 
 App.Weapon.FIXTURES = [{
 	name: "Giant Flaming Rubber Chicken",
-	skill: 1,
+	skill: '1',
 	damage: 3,
 	range: 2,
 	crit: 3,
 	special: "Sets shit on fire",
-	character: 1,
+	character: '1',
 	id: 1
 }];
 
@@ -207,7 +335,7 @@ App.Weapon.FIXTURES = [{
 App.Armor.FIXTURES = [{
 	name: "Flimsy Tofu Hauberk",
 	stats: "5 or something",
-	character: 1,
+	character: '1',
 	id: 1
 }];
 
@@ -216,7 +344,7 @@ App.Criticalinjury.FIXTURES = [{
 	name: "Severed Arm",
 	severity: "Pretty damn severe",
 	result: "You suck at things",
-	character: 1,
+	character: '1',
 	id: 1
 }];
 
@@ -224,7 +352,7 @@ App.Criticalinjury.FIXTURES = [{
 App.XP.FIXTURES = [{
 	source: "7/28/13 session",
 	amount: 20,
-	character: 1,
+	character: '1',
 	id: 1
 }];
 
@@ -562,194 +690,194 @@ App.Character.FIXTURES = [{
 App.Rank.FIXTURES = [
 {
 	id: 1,
-	character: 1,
-	skill: 1,
+	character: '1',
+	skill: '1',
 	rank: 2
 },
 {
 	id: 2,
-	character: 1,
-	skill: 2,
+	character: '1',
+	skill: '2',
 	rank: 0,
 },
 {
 	id: 3,
-	character: 1,
-	skill: 3,
+	character: '1',
+	skill: '3',
 	rank: 0,
 },
 {
 	id: 4,
-	character: 1,
-	skill: 4,
+	character: '1',
+	skill: '4',
 	rank: 2,
 },
 {
 	id: 5,
-	character: 1,
-	skill: 5,
+	character: '1',
+	skill: '5',
 	rank: 0,
 },
 {
 	id: 6,
-	character: 1,
-	skill: 6,
+	character: '1',
+	skill: '6',
 	rank: 0,
 },
 {
 	id: 7,
-	character: 1,
-	skill: 7,
+	character: '1',
+	skill: '7',
 	rank: 1,
 },
 {
 	id: 8,
-	character: 1,
-	skill: 8,
+	character: '1',
+	skill: '8',
 	rank: 1,
 },
 {
 	id: 9,
-	character: 1,
-	skill: 9,
+	character: '1',
+	skill: '9',
 	rank: 1,
 },
 {
 	id: 10,
-	character: 1,
-	skill: 10,
+	character: '1',
+	skill: '10',
 	rank: 1,
 },
 {
 	id: 11,
-	character: 1,
-	skill: 11,
+	character: '1',
+	skill: '11',
 	rank: 1,
 },
 {
 	id: 12,
-	character: 1,
-	skill: 12,
+	character: '1',
+	skill: '12',
 	rank: 1,
 },
 {
 	id: 13,
-	character: 1,
-	skill: 13,
+	character: '1',
+	skill: '13',
 	rank: 1,
 },
 {
 	id: 14,
-	character: 1,
-	skill: 14,
+	character: '1',
+	skill: '14',
 	rank: 1,
 },
 {
 	id: 15,
-	character: 1,
-	skill: 15,
+	character: '1',
+	skill: '15',
 	rank: 1,
 },
 {
 	id: 16,
-	character: 1,
-	skill: 16,
+	character: '1',
+	skill: '16',
 	rank: 1,
 },
 {
 	id: 17,
-	character: 1,
-	skill: 17,
+	character: '1',
+	skill: '17',
 	rank: 1,
 },
 {
 	id: 18,
-	character: 1,
-	skill: 18,
+	character: '1',
+	skill: '18',
 	rank: 1,
 },
 {
 	id: 19,
-	character: 1,
-	skill: 19,
+	character: '1',
+	skill: '19',
 	rank: 1,
 },
 {
 	id: 20,
-	character: 1,
-	skill: 20,
+	character: '1',
+	skill: '20',
 	rank: 1,
 },
 {
 	id: 21,
-	character: 1,
-	skill: 21,
+	character: '1',
+	skill: '21',
 	rank: 1,
 },
 {
 	id: 22,
-	character: 1,
-	skill: 22,
+	character: '1',
+	skill: '22',
 	rank: 1,
 },
 {
 	id: 23,
-	character: 1,
-	skill: 23,
+	character: '1',
+	skill: '23',
 	rank: 1,
 },
 {
 	id: 24,
-	character: 1,
-	skill: 24,
+	character: '1',
+	skill: '24',
 	rank: 1,
 },
 {
 	id: 25,
-	character: 1,
-	skill: 25,
+	character: '1',
+	skill: '25',
 	rank: 1,
 },
 {
 	id: 26,
-	character: 1,
-	skill: 26,
+	character: '1',
+	skill: '26',
 	rank: 1,
 },
 {
 	id: 27,
-	character: 1,
-	skill: 27,
+	character: '1',
+	skill: '27',
 	rank: 1,
 },
 {
 	id: 28,
-	character: 1,
-	skill: 28,
+	character: '1',
+	skill: '28',
 	rank: 1,
 },
 {
 	id: 29,
-	character: 1,
-	skill: 29,
+	character: '1',
+	skill: '29',
 	rank: 1,
 },
 {
 	id: 30,
-	character: 1,
-	skill: 30,
+	character: '1',
+	skill: '30',
 	rank: 1,
 },
 {
 	id: 31,
-	character: 1,
-	skill: 31,
+	character: '1',
+	skill: '31',
 	rank: 1,
 },
 {
 	id: 32,
-	character: 1,
-	skill: 32,
+	character: '1',
+	skill: '32',
 	rank: 1,
 }
 ];

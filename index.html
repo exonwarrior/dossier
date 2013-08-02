@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/stylePlain.css">
   <script src="//use.edgefonts.net/advent-pro.js"></script>
+  <script src="//use.edgefonts.net/bad-script.js"></script>
 </head>
 <body>
   <script type="text/x-handlebars" data-template-name="application">
@@ -18,40 +19,65 @@
       {{#each character in controller}}
         {{#linkTo "character" character}}{{ character.name }}  {{/linkTo}}<br>
       {{/each}}
+      <a {{action 'createCharacter'}}>[+]</a>
     </div>
     {{ outlet }}
   </script>
 
   <script type="text/x-handlebars" data-template-name="character">
     <!--<span style="font-size: 7pt;">characterTemplate</span><br>-->
-    <div class="character">
+    <div class="character" {{bindAttr class="isEditing:editing"}}>
       {{partial "header"}}
       <div class="characterStats">
         {{partial currentStats}}     
       </div> 
       <div class="characterCharacteristics">
         <div class="characteristicBox">
-          <div class="characteristicValue">{{brawn}}</div>
+          <div class="characteristicValue">{{#if isEditing}}
+              {{view Ember.TextField valueBinding="brawn"}}
+            {{else}}
+              {{brawn}}
+            {{/if}}</div>
           <div class="characteristicLabel">Brawn</div>
         </div>
         <div class="characteristicBox">
-          <div class="characteristicValue">{{agility}}</div>
+          <div class="characteristicValue">{{#if isEditing}}
+              {{view Ember.TextField valueBinding="agility"}}
+            {{else}}
+              {{agility}}
+            {{/if}}</div>
           <div class="characteristicLabel">Agility</div>
         </div>
         <div class="characteristicBox">
-          <div class="characteristicValue">{{intellect}}</div>
+          <div class="characteristicValue">{{#if isEditing}}
+              {{view Ember.TextField valueBinding="intellect"}}
+            {{else}}
+              {{intellect}}
+            {{/if}}</div>
           <div class="characteristicLabel">Intellect</div>
         </div>
         <div class="characteristicBox">
-          <div class="characteristicValue">{{cunning}}</div>
+          <div class="characteristicValue">{{#if isEditing}}
+              {{view Ember.TextField valueBinding="cunning"}}
+            {{else}}
+              {{cunning}}
+            {{/if}}</div>
           <div class="characteristicLabel">Cunning</div>
         </div>
         <div class="characteristicBox">
-          <div class="characteristicValue">{{willpower}}</div>
+          <div class="characteristicValue">{{#if isEditing}}
+              {{view Ember.TextField valueBinding="willpower"}}
+            {{else}}
+              {{willpower}}
+            {{/if}}</div>
           <div class="characteristicLabel">Willpower</div>
         </div>
         <div class="characteristicBox">
-          <div class="characteristicValue">{{presence}}</div>
+          <div class="characteristicValue">{{#if isEditing}}
+              {{view Ember.TextField valueBinding="presence"}}
+            {{else}}
+              {{presence}}
+            {{/if}}</div>
           <div class="characteristicLabel">Presence</div>
         </div>
       </div>
@@ -235,42 +261,42 @@
     <h1>Current Stats</h1>
     <div class="statBox dual">
       <div class="row statRow">
-        <div class="statLeft current">{{woundsCurrent}}<div class="statBoxLabel">[-] Current [+]</div></div><div class="statRight threshold">{{woundsThreshold}}<div class="statBoxLabel">Threshold</div></div>
+        <div class="statLeft current">{{woundsCurrent}}<div class="statBoxLabel"><a {{action 'addToStat' "woundsCurrent" -1}}>[-]</a> Current <a {{action 'addToStat' "woundsCurrent" 1}}>[+]</a></div></div><div class="statRight threshold">{{woundsThreshold}}<div class="statBoxLabel"><a {{action 'addToStat' "woundsThreshold" -1}}>[-]</a> Threshold <a {{action 'addToStat' "woundsThreshold" 1}}>[+]</a></div></div>
       </div>
-      <div class="statRow">
+      <div class="statRow bottom">
         <div class="statLabel">Wounds</div>
       </div>
     </div>
     <div class="statBox dual">
       <div class="row statRow">
-        <div class="statLeft current">{{strainCurrent}}<div class="statBoxLabel">[-] Current [+]</div></div><div class="statRight threshold">{{strainThreshold}}<div class="statBoxLabel">Threshold</div></div>
+        <div class="statLeft current">{{strainCurrent}}<div class="statBoxLabel"><a {{action 'addToStat' "strainCurrent" -1}}>[-]</a> Current <a {{action 'addToStat' "strainCurrent" 1}}>[+]</a></div></div><div class="statRight threshold">{{strainThreshold}}<div class="statBoxLabel"><a {{action 'addToStat' "strainThreshold" -1}}>[-]</a> Threshold <a {{action 'addToStat' "strainThreshold" 1}}>[+]</a></div></div>
       </div>
-      <div class="statRow">
+      <div class="statRow bottom">
         <div class="statLabel">Strain</div>
       </div>
     </div>
     <div class="statBox dual">
       <div class="row statRow">
-        <div class="statLeft ranged">{{defenseRanged}}<div class="statBoxLabel">Ranged</div></div><div class="statRight melee">{{defenseMelee}}<div class="statBoxLabel">Melee</div></div>
+        <div class="statLeft ranged">{{defenseRanged}}<div class="statBoxLabel"><a {{action 'addToStat' "defenseRanged" -1}}>[-]</a> Ranged <a {{action 'addToStat' "defenseRanged" 1}}>[+]</a></div></div><div class="statRight melee">{{defenseMelee}}<div class="statBoxLabel"><a {{action 'addToStat' "defenseMelee" -1}}>[-]</a> Melee <a {{action 'addToStat' "defenseMelee" 1}}>[+]</a></div></div>
       </div>
-      <div class="statRow">
+      <div class="statRow bottom">
         <div class="statLabel">Defense</div>
       </div>
     </div>
     <div class="statBox solo">
       <div class="row statRow">
-        <div class="statLeft">{{soak}}<div class="statBoxLabel">&nbsp;</div></div>
+        <div class="statLeft">{{currentSoak}}<div class="statBoxLabel">{{#if soakModded}}( {{soakModdedPref}}{{soakMod}} ){{else}}&nbsp;{{/if}}</div></div>
       </div>
-      <div class="statRow">
-        <div class="statLabel">Soak</div>
+      <div class="statRow bottom">
+        <div class="statLabel"><a {{action 'addToSoak' -1}}>[-]</a> Soak <a {{action 'addToSoak' 1}}>[+]</a></div>
       </div>
     </div>
     <div class="statBox solo">
       <div class="row statRow">
-        <div class="statLeft">{{dice boostSetbackDice}}<div class="statBoxLabel">&nbsp;</div></div>
+        <div class="statLeft">{{#if boostSetbackDice}}{{dice boostSetbackDice}}{{else}}&nbsp;{{/if}}<div class="statBoxLabel">&nbsp;</div></div>
       </div>
-      <div class="statRow">
-        <div class="statLabel">Boost/Setback</div>
+      <div class="statRow bottom">
+        <div class="statLabel"><span class="boostDice"><a {{action 'addDice' -1 "b"}}>[-]</a> <a {{action 'addDice' 1 "b"}}>[+]</a></span> Boost/Setback <span class="setbackDice"><a {{action 'addDice' -1 "s"}}>[-]</a> <a {{action 'addDice' 1 "s"}}>[+]</a></span> </div>
       </div>
     </div>
   </script> 
@@ -281,23 +307,45 @@
         <tbody>
           <tr>
             <td class="fieldLabel col1">Species</td>
-            <td class="field col2">{{species}}</td>
+            <td class="field col2">
+            {{#if isEditing}}
+              {{view Ember.TextField valueBinding="species"}}
+            {{else}}
+              {{species}}
+            {{/if}}
+            </td>
           </tr>
           <tr>
             <td class="fieldLabel col1">Career</td>
-            <td class="field col2">{{career}}</td>
+            <td class="field col2">{{#if isEditing}}
+              {{view Ember.TextField valueBinding="career"}}
+            {{else}}
+              {{career}}
+            {{/if}}</td>
           </tr>
           <tr>
             <td class="fieldLabel col1">Gender</td>
-            <td class="field col2">{{gender}}</td>
+            <td class="field col2">{{#if isEditing}}
+              {{view Ember.TextField valueBinding="gender"}}
+            {{else}}
+              {{gender}}
+            {{/if}}</td>
           </tr>
           <tr>
             <td class="fieldLabel col1">Age</td>
-            <td class="field col2">{{age}}</td>
+            <td class="field col2">{{#if isEditing}}
+              {{view Ember.TextField valueBinding="age"}}
+            {{else}}
+              {{age}}
+            {{/if}}</td>
           </tr>
           <tr>
             <td class="fieldLabel col1">Height</td>
-            <td class="field col2">{{height}}cm</td>
+            <td class="field col2">{{#if isEditing}}
+              {{view Ember.TextField valueBinding="height"}}
+            {{else}}
+              {{height}}cm
+            {{/if}}</td>
           </tr>
         </tbody>
       </table>
@@ -305,30 +353,61 @@
         <tbody>
           <tr>
             <td class="fieldLabel col1">Hair</td>
-            <td class="field col2">{{hair}}</td>
+            <td class="field col2">{{#if isEditing}}
+              {{view Ember.TextField valueBinding="hair"}}
+            {{else}}
+              {{hair}}
+            {{/if}}</td>
           </tr>
           <tr>
             <td class="fieldLabel col1">Eyes</td>
-            <td class="field col2">{{eyes}}</td>
+            <td class="field col2">{{#if isEditing}}
+              {{view Ember.TextField valueBinding="eyes"}}
+            {{else}}
+              {{eyes}}
+            {{/if}}</td>
           </tr>
           <tr>
             <td class="fieldLabel col1">Notable Features</td>
-            <td class="field col2">{{notableFeatures}}</td>
+            <td class="field col2">{{#if isEditing}}
+              {{view Ember.TextField valueBinding="notableFeatures"}}
+            {{else}}
+              {{notableFeatures}}
+            {{/if}}</td>
           </tr>
           <tr>
             <td class="fieldLabel col1">Build</td>
-            <td class="field col2">{{build}}</td>
+            <td class="field col2">{{#if isEditing}}
+              {{view Ember.TextField valueBinding="build"}}
+            {{else}}
+              {{build}}
+            {{/if}}</td>
           </tr>
           <tr>
             <td class="fieldLabel col1">Player</td>
-            <td class="field col2">{{playerName}}</td>
+            <td class="field col2">{{#if isEditing}}
+              {{view Ember.TextField valueBinding="playerName"}}
+            {{else}}
+              {{playerName}}
+            {{/if}}</td>
           </tr>
         </tbody>
       </table>
       <div class="characterBadge inlineBlock">
-        <img {{bindAttr src="portraitURL"}} alt="" class=""><h1 class="">{{name}}</h1>
+        <img {{bindAttr src="portraitURL"}} alt="" class="">{{#if isEditing}}
+              {{view Ember.TextField valueBinding="name"}}
+            {{else}}<h1 class="">
+              {{name}}
+            </h1>{{/if}}
       </div>
     </header>
+    {{#if isEditing}}
+      <a {{action 'saveCharacter'}}>[done]</a>
+    {{else}}
+      <a {{action 'editCharacter'}}>[edit]</a> <a {{action 'deleteCharacter'}}>[delete]</a>
+    {{/if}}
+
+    
   </script>
 
   <script type="text/x-handlebars" data-template-name="_generalSkills">
