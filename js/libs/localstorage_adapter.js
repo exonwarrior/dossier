@@ -88,6 +88,7 @@ DS.LSAdapter = DS.Adapter.extend(Ember.Evented, {
     var id, record, property, test, push;
     for (id in records) {
       record = records[id];
+      push = true;
       for (property in query) {
         test = query[property];
         push = false;

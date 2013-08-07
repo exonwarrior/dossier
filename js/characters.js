@@ -46,41 +46,35 @@ App.CharactersController = Ember.ArrayController.extend({
 			obligation: []
 		});
 
-		character.save().then(function(response){
-			App.Skill.find().then(function(records){
-				// records.forEach(function(item, index){
-				// 	console.log(item, index);
-				// });
-				records.forEach(function(item, index){
-					//console.log("HI");
-					//Throwing an "uncommitted" error. Need to fix. 
+		character.save().then(function(record){
+			App.Skill.find({}).then(function(skills){
+				skills.forEach(function(item, index){
 					var newRank = character.get('skills').createRecord({
 						skill: item,
 						rank: 0
-						// character: character
 					});
-
+					newRank.save();
 					
+					console.log(newRank.get('skill.type'));
 					switch(newRank.get('skill.type')){
 						case '1':
+							console.log("General!");
 							character.get('generalSkills').addObject(newRank);
 							break;
 						case '2':
+							console.log("Combat!");
 							character.get('combatSkills').addObject(newRank);
 							break;
 						case '3':
+							console.log("Knowledge!");
 							character.get('knowledgeSkills').addObject(newRank);
 							break;
 					}
-					
-					
-					// newRank.save();
 				});
-			});
+			});	
 		});
-			
-		
 
+		
 		
 		
 		

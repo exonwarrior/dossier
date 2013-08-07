@@ -72,7 +72,7 @@ App.CharacterController = Ember.ObjectController.extend({
 		this.set(stat, newValue);
 	},
 	createWeapon: function(){
-		this.get('weapons').createRecord({
+		var newWeapon = this.get('weapons').createRecord({
 			isEditing: true,
 			name: "<name>",
 			damage: "<damage>",

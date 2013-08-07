@@ -428,12 +428,12 @@
 
   <script type="text/x-handlebars" data-template-name="weapon">
     <tr>
-      <td class="col1">{{#if isEditing}}{{view Ember.TextField valueBinding="name"}}{{else}}{{name}}{{/if}}</td>
-      <td class="col2">{{#if isEditing}}{{view Ember.TextField valueBinding="skill"}}{{else}}{{skill}}{{/if}}</td>
-      <td class="col3">{{#if isEditing}}{{view Ember.TextField valueBinding="damage"}}{{else}}{{damage}}{{/if}}</td>
-      <td class="col4">{{#if isEditing}}{{view Ember.TextField valueBinding="range"}}{{else}}{{range}}{{/if}}</td>
-      <td class="col5">{{#if isEditing}}{{view Ember.TextField valueBinding="crit"}}{{else}}{{crit}}{{/if}}</td> 
-      <td class="col6">{{#if isEditing}}{{view Ember.TextField valueBinding="special"}}{{else}}{{special}}{{/if}}</td>
+      <td class="col1">{{#if isEditing}}{{view App.EditTextView valueBinding="name"}} - <a {{action 'deleteRecord'}}[x]</a>{{else}}<a {{action "editItem" on="doubleClick"}}>{{name}}</a>{{/if}}</td>
+      <td class="col2">{{#if isEditing}}{{view App.EditTextView valueBinding="skill"}}{{else}}<a {{action "editItem" on="doubleClick"}}>{{skill}}</a>{{/if}}</td>
+      <td class="col3">{{#if isEditing}}{{view App.EditTextView valueBinding="damage"}}{{else}}<a {{action "editItem" on="doubleClick"}}>{{damage}}</a>{{/if}}</td>
+      <td class="col4">{{#if isEditing}}{{view App.EditTextView valueBinding="range"}}{{else}}<a {{action "editItem" on="doubleClick"}}>{{range}}</a>{{/if}}</td>
+      <td class="col5">{{#if isEditing}}{{view App.EditTextView valueBinding="crit"}}{{else}}<a {{action "editItem" on="doubleClick"}}>{{crit}}</a>{{/if}}</td> 
+      <td class="col6">{{#if isEditing}}{{view App.EditTextView valueBinding="special"}}{{else}}<a {{action "editItem" on="doubleClick"}}>{{special}}</a>{{/if}}</td>
     </tr>
   </script>
 

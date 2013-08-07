@@ -1,7 +1,7 @@
 App.SkillsRoute = Ember.Route.extend({
-	// model: function(){
-	// 	return App.Skill.find();
-	// }
+	model: function(){
+		return App.Skill.find();
+	}
 });
 
 App.SkillsController = Ember.ArrayController.extend({
