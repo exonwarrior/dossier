@@ -92,7 +92,7 @@
         </div>
       </div>
       <div class="characterWeapons">
-        <h1>Weapons [+]</h1>
+        <h1>Weapons <a {{action createWeapon}}>[+]</a></h1>
         <div class="contentBlock">
           <table class="">
             <thead>
@@ -106,15 +106,8 @@
               </tr>
             </thead>
             <tbody>
-              {{#each item in weapons}}
-              <tr>
-                <td class="col1">{{item.name}}</td>
-                <td class="col2">{{item.skill}}</td>
-                <td class="col3">{{item.damage}}</td>
-                <td class="col4">{{item.range}}</td>
-                <td class="col5">{{item.crit}}</td> 
-                <td class="col6">{{item.special}}</td>
-              </tr>
+              {{#each weapon in weapons}}
+                {{control "weapon" weapon}}
               {{/each}}
             </tbody>
           </table>
@@ -416,8 +409,9 @@
       <thead>
         <tr>
           <td class="col1">Skill</td>
-          <td class="col2">Rank</td>
-          <td class="col3">Dice Pool</td>
+          <td class="col2 adjustRank"></td>
+          <td class="col3">Rank</td>
+          <td class="col4">Dice Pool</td>
         </tr>
       </thead>
       <tbody>
@@ -429,7 +423,18 @@
   </script>
 
   <script type="text/x-handlebars" data-template-name="rank">
-    <tr><td class="col1">{{skill.name}}</td><td class="col2">{{rank.rank}}</td><td class="col3">{{dice dicePool}}</td></tr>
+    <tr><td class="col1">{{skill.name}}</td><td class="col2"> <a {{action 'adjustRank' -1}}>[-]</a>  <a {{action 'adjustRank' 1}}>[+]</a></td><td class="col3">{{rank.rank}}</td><td class="col4">{{dice dicePool}}</td></tr>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="weapon">
+    <tr>
+      <td class="col1">{{#if isEditing}}{{view Ember.TextField valueBinding="name"}}{{else}}{{name}}{{/if}}</td>
+      <td class="col2">{{#if isEditing}}{{view Ember.TextField valueBinding="skill"}}{{else}}{{skill}}{{/if}}</td>
+      <td class="col3">{{#if isEditing}}{{view Ember.TextField valueBinding="damage"}}{{else}}{{damage}}{{/if}}</td>
+      <td class="col4">{{#if isEditing}}{{view Ember.TextField valueBinding="range"}}{{else}}{{range}}{{/if}}</td>
+      <td class="col5">{{#if isEditing}}{{view Ember.TextField valueBinding="crit"}}{{else}}{{crit}}{{/if}}</td> 
+      <td class="col6">{{#if isEditing}}{{view Ember.TextField valueBinding="special"}}{{else}}{{special}}{{/if}}</td>
+    </tr>
   </script>
 
  <script type="text/x-handlebars" data-template-name="_combatSkills">
@@ -438,8 +443,9 @@
      <thead>
        <tr>
          <td class="col1">Skill</td>
-         <td class="col2">Rank</td>
-         <td class="col3">Dice Pool</td>
+          <td class="col2 adjustRank"></td>
+          <td class="col3">Rank</td>
+          <td class="col4">Dice Pool</td>
        </tr>
      </thead>
      <tbody>
@@ -454,9 +460,10 @@
     <table class="">
       <thead>
        <tr>
-         <td class="col1">Skill</td>
-         <td class="col2">Rank</td>
-         <td class="col3">Dice Pool</td>
+          <td class="col1">Skill</td>
+          <td class="col2 adjustRank"></td>
+          <td class="col3">Rank</td>
+          <td class="col4">Dice Pool</td>
        </tr>
      </thead>
      <tbody>
@@ -465,7 +472,7 @@
         {{/each}}
      </tbody>
     </table>
-    <h2>Custom Skills [+]</h2>
+    <!--<h2>Custom Skills [+]</h2>
     <table class="">
       <thead>
        <tr>
@@ -474,11 +481,11 @@
        </tr>
      </thead>
      <tbody>
-       {{#each item in customSkills}}
-       <tr><td class="col1">{{item.skill.name}}</td><td class="col2">{{item.rank}}</td><td class="col3">{{item.dicePool}}</td></tr>
-       {{/each}}
+       {{#each rank in customSkills}}
+          {{control "rank" rank}}
+        {{/each}}
      </tbody>
-    </table>
+    </table>-->
   </script>
 
     <!--
@@ -507,6 +514,7 @@
   <script src="js/libs/handlebars-1.0.0-rc.4.js"></script>
   <script src="js/libs/ember-1.0.0-rc.6.js"></script>
   <script src="js/libs/ember-data-0.13.js"></script>
+  <script src="js//libs/localstorage_adapter.js"></script>
   <script src="js/app.js"></script>
   <script src="js/router.js"></script>
   <script src="js/character.js"></script>
@@ -520,8 +528,12 @@
   <script src="js/inventoryItem.js"></script>
   <script src="js/rank.js"></script>
   <script src="js/skill.js"></script>
+  <script src="js/skills.js"></script>
+  <script src="js/ranks.js"></script>
   <script src="js/index.js"></script>
-  <script src="js/fixtures.js"></script>
+  <!--<script src="js/fixtures.js"></script>-->
+  <script src="js/hbHelpers.js"></script>
+
 
 
 

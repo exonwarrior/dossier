@@ -5,9 +5,11 @@ App.CharactersRoute = Ember.Route.extend({
 });
 
 App.CharactersController = Ember.ArrayController.extend({
+	anyEditing: function(){
+
+	},
 	createCharacter: function(){
 		var character = App.Character.createRecord({
-			isEditing: true,
 			species: "<species>",
 			career: "<career>",
 			gender: "<gender>",
@@ -34,11 +36,6 @@ App.CharactersController = Ember.ArrayController.extend({
 			willpower: 1,
 			presence: 1,
 			portraitURL: "http://placekitten.com/200/200",
-			skills: [],
-			generalSkills: [],
-			combatSkills: [],
-			knowledgeSkills:  [],
-			customSkills: [],
 			inventory: [],
 			weapons: [],
 			armor: [],
@@ -48,6 +45,44 @@ App.CharactersController = Ember.ArrayController.extend({
 			motivation: [],
 			obligation: []
 		});
-		character.save();	
+
+		character.save().then(function(response){
+			App.Skill.find().then(function(records){
+				// records.forEach(function(item, index){
+				// 	console.log(item, index);
+				// });
+				records.forEach(function(item, index){
+					//console.log("HI");
+					//Throwing an "uncommitted" error. Need to fix. 
+					var newRank = character.get('skills').createRecord({
+						skill: item,
+						rank: 0
+						// character: character
+					});
+
+					
+					switch(newRank.get('skill.type')){
+						case '1':
+							character.get('generalSkills').addObject(newRank);
+							break;
+						case '2':
+							character.get('combatSkills').addObject(newRank);
+							break;
+						case '3':
+							character.get('knowledgeSkills').addObject(newRank);
+							break;
+					}
+					
+					
+					// newRank.save();
+				});
+			});
+		});
+			
+		
+
+		
+		
+		
 	}
 });

@@ -156,6 +156,13 @@ img.die{
 	text-align: center;
 }
 
+.character input{
+	text-align: center;
+}
+.character .col1 input{
+	text-align: left;
+}
+
 .character div.twoUp{
 	width: calc(50% - 22px);
 	display: inline-block;

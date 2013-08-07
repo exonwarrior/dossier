@@ -1,10 +1,10 @@
 App.CharacterController = Ember.ObjectController.extend({
+	needs: ['skill'],
 	totalXP: function(){
 		return this.get('xp').getEach('amount').reduce(function(accum,item) {
 			return accum + item;
 		},0);
 	}.property('xp.@each.amount'),
-
 	editCharacter: function(){
 		this.set('isEditing', true);
 	},
@@ -71,18 +71,27 @@ App.CharacterController = Ember.ObjectController.extend({
 		var newValue = current + amount;
 		this.set(stat, newValue);
 	},
-	increaseRank: function(skill, amount){
-
+	createWeapon: function(){
+		this.get('weapons').createRecord({
+			isEditing: true,
+			name: "<name>",
+			damage: "<damage>",
+			range: "<range>",
+			crit: "<crit>",
+			special: "<special>",
+			skill: "<skill>"
+		});
 	}
 });
 
 
 App.Character = DS.Model.extend({
+  isEditing: DS.attr('boolean'),
   species: DS.attr('string'),
   career: DS.attr('string'),
   gender: DS.attr('string'),
-  age: DS.attr('number'),
-  height: DS.attr('number'),
+  age: DS.attr('string'),
+  height: DS.attr('string'),
   hair: DS.attr('string'),
   eyes: DS.attr('string'),
   notableFeatures: DS.attr('string'),
