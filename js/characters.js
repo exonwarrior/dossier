@@ -53,7 +53,8 @@ App.CharactersController = Ember.ArrayController.extend({
 						skill: item,
 						rank: 0
 					});
-					newRank.save();
+					
+					newRank.get('store').commit();
 					
 					switch(newRank.get('skill.type')){
 						case '1':
