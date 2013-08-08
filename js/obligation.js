@@ -4,3 +4,7 @@ App.Obligation = DS.Model.extend({
 	details: DS.attr('string'),
 	character: DS.belongsTo('App.Character')
 });
+
+App.ObligationController = App.ItemController.extend({
+	
+});

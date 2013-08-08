@@ -2,7 +2,7 @@ App.CharacterController = Ember.ObjectController.extend({
 	needs: ['skill'],
 	totalXP: function(){
 		return this.get('xp').getEach('amount').reduce(function(accum,item) {
-			return accum + item;
+			return parseInt(accum) + parseInt(item);
 		},0);
 	}.property('xp.@each.amount'),
 	editCharacter: function(){
@@ -17,7 +17,6 @@ App.CharacterController = Ember.ObjectController.extend({
 		character.deleteRecord();
 		character.save();
 		this.transitionToRoute('characters');
-		//alert("This is kind of broken");
 	},
 	baseSoak: function(){
 		return this.get('brawn');
@@ -81,6 +80,50 @@ App.CharacterController = Ember.ObjectController.extend({
 			special: "<special>",
 			skill: "<skill>"
 		});
+	},
+	createArmor: function(){
+		var newArmor = this.get('armor').createRecord({
+			isEditing: true,
+			name: "<name>",
+			stats: "<stats>"
+		});
+	},
+	createInventoryItem: function(){
+		var newItem = this.get('item').createRecord({
+			isEditing: true,
+			name: "<name>",
+			description: "<description>"
+		});
+	},
+	createCriticalInjury: function(){
+		var newInjury = this.get('criticalInjuries').createRecord({
+			isEditing: true,
+			injury: "<injury>",
+			severity: "<severity>",
+			result: "<result>"
+		});
+	},
+	createXPItem: function(){
+		var newXPItem = this.get('xp').createRecord({
+			isEditing: true,
+			source: "<source>",
+			amount: "<amount>"
+		});
+	},
+	createMotivation: function(){
+		var newMotivation = this.get('motivation').createRecord({
+			isEditing: true,
+			motivation: "<motivation>",
+			description: "<description>" 
+		});
+	},
+	createObligation: function(){
+		var newObligation = this.get('obligation').createRecord({
+			isEditing: true,
+			type: "<type>",
+			magnitude: "<magnitude>",
+			details: "<details>"
+		});
 	}
 });
 
@@ -121,7 +164,7 @@ App.Character = DS.Model.extend({
   weapons: DS.hasMany('App.Weapon'),
   armor: DS.hasMany('App.Armor'),
   criticalInjuries: DS.hasMany('App.Criticalinjury'),
-  xp: DS.hasMany('App.XP'),
+  xp: DS.hasMany('App.Xp'),
   availableXP: DS.attr('number'),
   motivation: DS.hasMany('App.Motivation'),
   obligation: DS.hasMany('App.Obligation')

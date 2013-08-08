@@ -3,3 +3,7 @@ App.InventoryItem = DS.Model.extend({
 	description: DS.attr('string'),
 	character: DS.belongsTo('App.Character')
 });
+
+App.InventoryItemController = App.ItemController.extend({
+	
+});

@@ -9,14 +9,6 @@ App.Weapon = DS.Model.extend({
 	character: DS.belongsTo('App.Character')
 });
 
-
-App.WeaponController = Ember.ObjectController.extend({
-	needs: 'skills',
-	editItem: function(){
-		this.set('isEditing', 'true');
-	},
-	acceptChanges: function(){
-		this.set('isEditing', 'false');
-		this.get('model').save();
-	}
+App.WeaponController = App.ItemController.extend({
+	
 });

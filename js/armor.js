@@ -3,3 +3,7 @@ App.Armor = DS.Model.extend({
 	stats: DS.attr('string'),
 	character: DS.belongsTo('App.Character')
 });
+
+App.ArmorController = App.ItemController.extend({
+	
+});

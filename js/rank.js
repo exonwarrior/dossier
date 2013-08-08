@@ -32,6 +32,6 @@ App.RankController = Ember.ObjectController.extend({
 			newRank = 0;
 		}
 		this.set('rank', newRank);
-		this.save();
+		this.get('model').save();
 	}
 });

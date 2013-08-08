@@ -55,28 +55,24 @@ App.CharactersController = Ember.ArrayController.extend({
 					});
 					newRank.save();
 					
-					console.log(newRank.get('skill.type'));
 					switch(newRank.get('skill.type')){
 						case '1':
-							console.log("General!");
 							character.get('generalSkills').addObject(newRank);
 							break;
 						case '2':
-							console.log("Combat!");
 							character.get('combatSkills').addObject(newRank);
 							break;
 						case '3':
-							console.log("Knowledge!");
 							character.get('knowledgeSkills').addObject(newRank);
 							break;
 					}
 				});
 			});	
+			character.save();
 		});
-
-		
-		
-		
-		
+		var self = this;
+		character.one('didUpdate', function(){
+			self.transitionToRoute('character', character);
+		});
 	}
 });

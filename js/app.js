@@ -22,6 +22,7 @@ App.Store = DS.Store.extend({
 
 App.EditTextView = Ember.TextField.extend({
   insertNewline: function () {
+    console.log(this);
     this.get('controller').acceptChanges();
   }
 });

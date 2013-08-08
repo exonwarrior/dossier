@@ -27,7 +27,7 @@ img.die{
 }
 
 .character{
-	width: 1180px;
+	width: 1024px;
 	margin: 0 auto;
 }
 
@@ -39,6 +39,16 @@ img.die{
 	position: absolute;
 	top: 350px;
 	left: 0;
+	background-color: #ccc;
+	padding: 5px;
+	border-radius: 0 10px 10px 0;
+}
+
+.characterList a{
+	padding: 2px;
+	border-radius: 5px;
+	color: #333;
+	text-decoration: none;
 }
 
 .characterList .active{
@@ -81,7 +91,7 @@ img.die{
 	text-align: center;
 	background-color: rgba(0,0,0,0.75);
 	color: #b2e6ff;
-	font-size: 28pt;
+	font-size: 18pt;
 	width: 100%;
 	margin: 0;
 } 
@@ -91,7 +101,7 @@ img.die{
 }
 
 .characterInfo table{
-	width: 445px;
+	width: 370px;
 	vertical-align: middle;
 	margin: 10px 20px;
 	min-width: 200px;
@@ -161,6 +171,7 @@ img.die{
 }
 .character .col1 input{
 	text-align: left;
+	width: 60%;
 }
 
 .character div.twoUp{
@@ -314,7 +325,7 @@ img.die{
 .characterEquipment{
 	display: inline-block;
 	vertical-align: top;
-	width: 1180px;
+	width: 1024px;
 }
 
 .characterWeapons{

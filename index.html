@@ -16,10 +16,11 @@
   <script type="text/x-handlebars" data-template-name="characters">
     <!--<span style="font-size: 7pt;">charactersTemplate</span><br>-->
     <div class="characterList">
+      <h2>Characters</h2>
       {{#each character in controller}}
-        {{#linkTo "character" character}}{{ character.name }}  {{/linkTo}}<br>
+        {{#linkTo "character" character}}{{ character.name }}{{/linkTo}}<br>
       {{/each}}
-      <a {{action 'createCharacter'}}>[+]</a>
+      <a {{action 'createCharacter'}}>[Create New]</a>
     </div>
     {{ outlet }}
   </script>
@@ -115,7 +116,7 @@
       </div>
       <div class="characterEquipment">
         <div class="characterArmor twoUp">
-          <h1>Armor [+]</h1>
+          <h1>Armor <a {{action 'createArmor'}}>[+]</a></h1>
           <div class="contentBlock">
             <table>
               <thead>
@@ -125,18 +126,15 @@
                 </tr>
               </thead>
               <tbody>
-                {{#each item in armor}}
-                <tr>
-                  <td class="itemName col1">{{item.name}}</td>
-                  <td class="armorStats col2">{{item.stats}}</td>
-                </tr>   
+                {{#each armor in armor}}
+                  {{control "armor" armor}}
                 {{/each}} 
               </tbody>
             </table>
           </div>
         </div>
         <div class="characterInventory twoUp">
-          <h1>Inventory [+]</h1>
+          <h1>Inventory <a {{action 'createInventoryItem'}}>[+]</a></h1>
           <div class="contentBlock">
             <table>
               <thead>
@@ -146,11 +144,8 @@
                 </tr>
               </thead>
               <tbody>
-                {{#each item in inventory}}
-                <tr>
-                  <td class="itemName col1">{{item.name}}</td>
-                  <td class="itemStats col2">{{item.description}}</td>
-                </tr>   
+                {{#each item in inventoryItem}}
+                  {{control "inventoryItem" item}}
                 {{/each}}
               </tbody>
             </table>
@@ -159,7 +154,7 @@
       </div>
       <div class="characterMiscInfo">
         <div class="characterCritInjuries twoUp">
-          <h1>Critical Injuries [+]</h1>
+          <h1>Critical Injuries <a {{action 'createCriticalInjury'}}>[+]</a></h1>
           <div class="contentBlock">
             <table>
               <thead>
@@ -170,19 +165,15 @@
                 </tr>
               </thead>
               <tbody>
-                {{#each injury in criticalInjuries}}
-                <tr>
-                  <td class="col1">{{injury.name}}</td>
-                  <td class="col2">{{injury.severity}}</td>
-                  <td class="col3">{{injury.result}}</td>
-                </tr>
+                {{#each item in criticalInjuries}}
+                  {{control "criticalInjury" item}}
                 {{/each}}
               </tbody>
             </table>
           </div>
         </div>
         <div class="characterXP twoUp">
-          <h1>XP</h1>
+          <h1>XP <a {{action 'createXPItem'}}>[+]</a></h1>
           <div class="contentBlock">
             <table>
               <thead>
@@ -192,11 +183,8 @@
                 </tr>
               </thead>
               <tbody>
-                {{#each xp in xp}}
-                <tr>
-                  <td class="col1">{{xp.source}}</td>
-                  <td class="col2">{{xp.amount}}</td>
-                </tr>
+                {{#each xpItem in xp}}
+                  {{control "xp" xpItem}}
                 {{/each}}
                  <tr>
                   <td class="col1"><strong>Total XP</strong></td>
@@ -211,20 +199,17 @@
           </div>
         </div>
         <div class="characterMotivation twoUp">
-          <h1>Motivations [+]</h1>
+          <h1>Motivations <a {{action 'createMotivation'}}>[+]</a></h1>
           <table>
             <tbody>
               {{#each item in motivation}}
-              <tr>
-                <td class="col1">{{item.name}}</td>
-                <td class="col2">{{item.description}}</td>
-              </tr>
+                {{control "motivation" item}}
               {{/each}}
             </tbody>
           </table>
         </div>
         <div class="characterObligation twoUp">
-          <h1>Obligation [+]</h1>
+          <h1>Obligation <a {{action 'createObligation'}}>[+]</a></h1>
           <div class="contentBlock">
             <table>
               <thead>
@@ -236,11 +221,7 @@
               </thead>
               <tbody>
                 {{#each item in obligation}}
-                <tr>
-                  <td class="col1">{{item.type}}</td>
-                  <td class="col2">{{item.magnitude}}</td>
-                  <td>{{item.details}}</td>
-                </tr>
+                  {{control "obligation" item}}
                 {{/each}}
               </tbody>
             </table>
@@ -428,7 +409,7 @@
 
   <script type="text/x-handlebars" data-template-name="weapon">
     <tr>
-      <td class="col1">{{#if isEditing}}{{view App.EditTextView valueBinding="name"}} - <a {{action 'deleteRecord'}}[x]</a>{{else}}<a {{action "editItem" on="doubleClick"}}>{{name}}</a>{{/if}}</td>
+      <td class="col1">{{#if isEditing}}{{view App.EditTextView valueBinding="name"}} <a {{action 'deleteItem'}}>[x]</a>{{else}}<a {{action "editItem" on="doubleClick"}}>{{name}}</a>{{/if}}</td>
       <td class="col2">{{#if isEditing}}{{view App.EditTextView valueBinding="skill"}}{{else}}<a {{action "editItem" on="doubleClick"}}>{{skill}}</a>{{/if}}</td>
       <td class="col3">{{#if isEditing}}{{view App.EditTextView valueBinding="damage"}}{{else}}<a {{action "editItem" on="doubleClick"}}>{{damage}}</a>{{/if}}</td>
       <td class="col4">{{#if isEditing}}{{view App.EditTextView valueBinding="range"}}{{else}}<a {{action "editItem" on="doubleClick"}}>{{range}}</a>{{/if}}</td>
@@ -436,6 +417,52 @@
       <td class="col6">{{#if isEditing}}{{view App.EditTextView valueBinding="special"}}{{else}}<a {{action "editItem" on="doubleClick"}}>{{special}}</a>{{/if}}</td>
     </tr>
   </script>
+
+  <script type="text/x-handlebars" data-template-name="armor">
+    <tr>
+      <td class="itemName col1">{{#if isEditing}}{{view App.EditTextView valueBinding="name"}} <a {{action 'deleteItem'}}>[x]</a>{{else}}<a {{action "editItem" on="doubleClick"}}>{{name}}</a>{{/if}}</td>
+      <td class="armorStats col2">{{#if isEditing}}{{view App.EditTextView valueBinding="stats"}}{{else}}<a {{action "editItem" on="doubleClick"}}>{{stats}}</a>{{/if}}</td>
+    </tr>   
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="inventoryItem">
+    <tr>
+      <td class="itemName col1">{{#if isEditing}}{{view App.EditTextView valueBinding="name"}} <a {{action 'deleteItem'}}>[x]</a>{{else}}<a {{action "editItem" on="doubleClick"}}>{{name}}</a>{{/if}}</td>
+      <td class="itemStats col2">{{#if isEditing}}{{view App.EditTextView valueBinding="description"}} <a {{action 'deleteItem'}}>[x]</a>{{else}}<a {{action "editItem" on="doubleClick"}}>{{description}}</a>{{/if}}</td>
+    </tr>   
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="criticalInjury">
+    <tr>
+      <td class="col1">{{#if isEditing}}{{view App.EditTextView valueBinding="injury"}} <a {{action 'deleteItem'}}>[x]</a>{{else}}<a {{action "editItem" on="doubleClick"}}>{{injury}}</a>{{/if}}</td>
+      <td class="col2">{{#if isEditing}}{{view App.EditTextView valueBinding="severity"}} {{else}}<a {{action "editItem" on="doubleClick"}}>{{severity}}</a>{{/if}}</td>
+      <td class="col3">{{#if isEditing}}{{view App.EditTextView valueBinding="result"}} {{else}}<a {{action "editItem" on="doubleClick"}}>{{result}}</a>{{/if}}</td>
+    </tr>
+  </script>
+
+<script type="text/x-handlebars" data-template-name="xp">
+  <tr>
+    <td class="col1">{{#if isEditing}}{{view App.EditTextView valueBinding="source"}} <a {{action 'deleteItem'}}>[x]</a>{{else}}<a {{action "editItem" on="doubleClick"}}>{{source}}</a>{{/if}}</td>
+    <td class="col2">{{#if isEditing}}{{view App.EditTextView valueBinding="amount"}} {{else}}<a {{action "editItem" on="doubleClick"}}>{{amount}}</a>{{/if}}</td>
+  </tr>
+</script>
+
+<script type="text/x-handlebars" data-template-name="motivation">
+    <tr>
+      <td class="col1">{{#if isEditing}}{{view App.EditTextView valueBinding="motivation"}} <a {{action 'deleteItem'}}>[x]</a>{{else}}<a {{action "editItem" on="doubleClick"}}>{{motivation}}</a>{{/if}}</td>
+      <td class="col2">{{#if isEditing}}{{view App.EditTextView valueBinding="description"}} {{else}}<a {{action "editItem" on="doubleClick"}}>{{description}}</a>{{/if}}</td>
+    </tr>
+</script>
+
+<script type="text/x-handlebars" data-template-name="obligation">
+    <tr>
+      <td class="col1">{{#if isEditing}}{{view App.EditTextView valueBinding="type"}} <a {{action 'deleteItem'}}>[x]</a>{{else}}<a {{action "editItem" on="doubleClick"}}>{{type}}</a>{{/if}}</td>
+      <td class="col2">{{#if isEditing}}{{view App.EditTextView valueBinding="magnitude"}} {{else}}<a {{action "editItem" on="doubleClick"}}>{{magnitude}}</a>{{/if}}</td>
+      <td>{{#if isEditing}}{{view App.EditTextView valueBinding="details"}} {{else}}<a {{action "editItem" on="doubleClick"}}>{{details}}</a>{{/if}}</td>
+    </tr>
+</script>
+
+
 
  <script type="text/x-handlebars" data-template-name="_combatSkills">
     <h2>Combat Skills</h2>
@@ -517,6 +544,7 @@
   <script src="js//libs/localstorage_adapter.js"></script>
   <script src="js/app.js"></script>
   <script src="js/router.js"></script>
+  <script src="js/item.js"></script>
   <script src="js/character.js"></script>
   <script src="js/characters.js"></script>
   <script src="js/obligation.js"></script>
