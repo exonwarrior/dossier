@@ -19,7 +19,7 @@
       {{#each character in controller}}
         {{#linkTo "character" character}}{{ character.name }}{{/linkTo}}<br>
       {{/each}}
-      <a {{action 'createCharacter'}}>[Create New]</a>
+      <button {{action 'createCharacter'}}>[Create New]</button>
     </div>
     {{ outlet }}
   </script>
@@ -34,7 +34,7 @@
       <div class="characterCharacteristics">
         <div class="characteristicBox">
           <div class="characteristicValue">{{#if isEditing}}
-              {{view Ember.TextField valueBinding="brawn"}}
+              {{view App.CharacteristicView min="0" max="6" step="1" maxlength="1" valueBinding="brawn"}}
             {{else}}
               {{brawn}}
             {{/if}}</div>
@@ -42,7 +42,7 @@
         </div>
         <div class="characteristicBox">
           <div class="characteristicValue">{{#if isEditing}}
-              {{view Ember.TextField valueBinding="agility"}}
+              {{view App.CharacteristicView min="0" max="6" step="1" maxlength="1" valueBinding="agility"}}
             {{else}}
               {{agility}}
             {{/if}}</div>
@@ -50,7 +50,7 @@
         </div>
         <div class="characteristicBox">
           <div class="characteristicValue">{{#if isEditing}}
-              {{view Ember.TextField valueBinding="intellect"}}
+              {{view App.CharacteristicView min="0" max="6" step="1" maxlength="1" valueBinding="intellect"}}
             {{else}}
               {{intellect}}
             {{/if}}</div>
@@ -58,7 +58,7 @@
         </div>
         <div class="characteristicBox">
           <div class="characteristicValue">{{#if isEditing}}
-              {{view Ember.TextField valueBinding="cunning"}}
+              {{view App.CharacteristicView min="0" max="6" step="1" maxlength="1" valueBinding="cunning"}}
             {{else}}
               {{cunning}}
             {{/if}}</div>
@@ -66,7 +66,7 @@
         </div>
         <div class="characteristicBox">
           <div class="characteristicValue">{{#if isEditing}}
-              {{view Ember.TextField valueBinding="willpower"}}
+              {{view App.CharacteristicView min="0" max="6" step="1" maxlength="1" valueBinding="willpower"}}
             {{else}}
               {{willpower}}
             {{/if}}</div>
@@ -74,7 +74,7 @@
         </div>
         <div class="characteristicBox">
           <div class="characteristicValue">{{#if isEditing}}
-              {{view Ember.TextField valueBinding="presence"}}
+              {{view App.CharacteristicView min="0" max="6" step="1" valueBinding="presence"}}
             {{else}}
               {{presence}}
             {{/if}}</div>
@@ -92,7 +92,7 @@
         </div>
       </div>
       <div class="characterWeapons">
-        <h1>Weapons <a {{action createWeapon}}>[+]</a></h1>
+        <h1>Weapons <button {{action createWeapon}}>[+]</button></h1>
         <div class="contentBlock">
           <table class="">
             <thead>
@@ -115,7 +115,7 @@
       </div>
       <div class="characterEquipment">
         <div class="characterArmor twoUp">
-          <h1>Armor <a {{action 'createArmor'}}>[+]</a></h1>
+          <h1>Armor <button {{action 'createArmor'}}>[+]</button></h1>
           <div class="contentBlock">
             <table>
               <thead>
@@ -133,7 +133,7 @@
           </div>
         </div>
         <div class="characterInventory twoUp">
-          <h1>Inventory <a {{action 'createInventoryItem'}}>[+]</a></h1>
+          <h1>Inventory <button {{action 'createInventoryItem'}}>[+]</button></h1>
           <div class="contentBlock">
             <table>
               <thead>
@@ -153,7 +153,7 @@
       </div>
       <div class="characterMiscInfo">
         <div class="characterCritInjuries twoUp">
-          <h1>Critical Injuries <a {{action 'createCriticalInjury'}}>[+]</a></h1>
+          <h1>Critical Injuries <button {{action 'createCriticalInjury'}}>[+]</button></h1>
           <div class="contentBlock">
             <table>
               <thead>
@@ -172,7 +172,7 @@
           </div>
         </div>
         <div class="characterXP twoUp">
-          <h1>XP <a {{action 'createXPItem'}}>[+]</a></h1>
+          <h1>XP <button {{action 'createXPItem'}}>[+]</button></h1>
           <div class="contentBlock">
             <table>
               <thead>
@@ -198,7 +198,7 @@
           </div>
         </div>
         <div class="characterMotivation twoUp">
-          <h1>Motivations <a {{action 'createMotivation'}}>[+]</a></h1>
+          <h1>Motivations <button {{action 'createMotivation'}}>[+]</button></h1>
           <table>
             <tbody>
               {{#each item in motivation}}
@@ -208,7 +208,7 @@
           </table>
         </div>
         <div class="characterObligation twoUp">
-          <h1>Obligation <a {{action 'createObligation'}}>[+]</a></h1>
+          <h1>Obligation <button {{action 'createObligation'}}>[+]</button></h1>
           <div class="contentBlock">
             <table>
               <thead>
@@ -234,7 +234,7 @@
     <h1>Current Stats</h1>
     <div class="statBox dual">
       <div class="row statRow">
-        <div class="statLeft current">{{woundsCurrent}}<div class="statBoxLabel"><a {{action 'addToStat' "woundsCurrent" -1}}>[-]</a> Current <a {{action 'addToStat' "woundsCurrent" 1}}>[+]</a></div></div><div class="statRight threshold">{{woundsThreshold}}<div class="statBoxLabel"><a {{action 'addToStat' "woundsThreshold" -1}}>[-]</a> Threshold <a {{action 'addToStat' "woundsThreshold" 1}}>[+]</a></div></div>
+        <div class="statLeft current">{{woundsCurrent}}<div class="statBoxLabel"><button {{action 'addToStat' "woundsCurrent" -1}}>[-]</button> Current <button {{action 'addToStat' "woundsCurrent" 1}}>[+]</button></div></div><div class="statRight threshold">{{woundsThreshold}}<div class="statBoxLabel"><button {{action 'addToStat' "woundsThreshold" -1}}>[-]</button> Threshold <button {{action 'addToStat' "woundsThreshold" 1}}>[+]</button></div></div>
       </div>
       <div class="statRow bottom">
         <div class="statLabel">Wounds</div>
@@ -242,7 +242,7 @@
     </div>
     <div class="statBox dual">
       <div class="row statRow">
-        <div class="statLeft current">{{strainCurrent}}<div class="statBoxLabel"><a {{action 'addToStat' "strainCurrent" -1}}>[-]</a> Current <a {{action 'addToStat' "strainCurrent" 1}}>[+]</a></div></div><div class="statRight threshold">{{strainThreshold}}<div class="statBoxLabel"><a {{action 'addToStat' "strainThreshold" -1}}>[-]</a> Threshold <a {{action 'addToStat' "strainThreshold" 1}}>[+]</a></div></div>
+        <div class="statLeft current">{{strainCurrent}}<div class="statBoxLabel"><button {{action 'addToStat' "strainCurrent" -1}}>[-]</button> Current <button {{action 'addToStat' "strainCurrent" 1}}>[+]</button></div></div><div class="statRight threshold">{{strainThreshold}}<div class="statBoxLabel"><button {{action 'addToStat' "strainThreshold" -1}}>[-]</button> Threshold <button {{action 'addToStat' "strainThreshold" 1}}>[+]</button></div></div>
       </div>
       <div class="statRow bottom">
         <div class="statLabel">Strain</div>
@@ -250,7 +250,7 @@
     </div>
     <div class="statBox dual">
       <div class="row statRow">
-        <div class="statLeft ranged">{{defenseRanged}}<div class="statBoxLabel"><a {{action 'addToStat' "defenseRanged" -1}}>[-]</a> Ranged <a {{action 'addToStat' "defenseRanged" 1}}>[+]</a></div></div><div class="statRight melee">{{defenseMelee}}<div class="statBoxLabel"><a {{action 'addToStat' "defenseMelee" -1}}>[-]</a> Melee <a {{action 'addToStat' "defenseMelee" 1}}>[+]</a></div></div>
+        <div class="statLeft ranged">{{defenseRanged}}<div class="statBoxLabel"><button {{action 'addToStat' "defenseRanged" -1}}>[-]</button> Ranged <button {{action 'addToStat' "defenseRanged" 1}}>[+]</button></div></div><div class="statRight melee">{{defenseMelee}}<div class="statBoxLabel"><button {{action 'addToStat' "defenseMelee" -1}}>[-]</button> Melee <button {{action 'addToStat' "defenseMelee" 1}}>[+]</button></div></div>
       </div>
       <div class="statRow bottom">
         <div class="statLabel">Defense</div>
@@ -261,7 +261,7 @@
         <div class="statLeft">{{currentSoak}}<div class="statBoxLabel">{{#if soakModded}}( {{soakModdedPref}}{{soakMod}} ){{else}}&nbsp;{{/if}}</div></div>
       </div>
       <div class="statRow bottom">
-        <div class="statLabel"><a {{action 'addToSoak' -1}}>[-]</a> Soak <a {{action 'addToSoak' 1}}>[+]</a></div>
+        <div class="statLabel"><button {{action 'addToSoak' -1}}>[-]</button> Soak <button {{action 'addToSoak' 1}}>[+]</button></div>
       </div>
     </div>
     <div class="statBox solo">
@@ -269,7 +269,7 @@
         <div class="statLeft">{{#if boostSetbackDice}}{{dice boostSetbackDice}}{{else}}&nbsp;{{/if}}<div class="statBoxLabel">&nbsp;</div></div>
       </div>
       <div class="statRow bottom">
-        <div class="statLabel"><span class="boostDice"><a {{action 'addDice' -1 "b"}}>[-]</a> <a {{action 'addDice' 1 "b"}}>[+]</a></span> Boost/Setback <span class="setbackDice"><a {{action 'addDice' -1 "s"}}>[-]</a> <a {{action 'addDice' 1 "s"}}>[+]</a></span> </div>
+        <div class="statLabel"><span class="boostDice"><button {{action 'addDice' -1 "b"}}>[-]</button> <button {{action 'addDice' 1 "b"}}>[+]</button></span> Boost/Setback <span class="setbackDice"><button {{action 'addDice' -1 "s"}}>[-]</button> <button {{action 'addDice' 1 "s"}}>[+]</button></span> </div>
       </div>
     </div>
   </script> 
@@ -282,7 +282,7 @@
             <td class="fieldLabel col1">Species</td>
             <td class="field col2">
             {{#if isEditing}}
-              {{view Ember.TextField valueBinding="species"}}
+              {{view App.EditTextView valueBinding="species"}}
             {{else}}
               {{species}}
             {{/if}}
@@ -291,7 +291,7 @@
           <tr>
             <td class="fieldLabel col1">Career</td>
             <td class="field col2">{{#if isEditing}}
-              {{view Ember.TextField valueBinding="career"}}
+              {{view App.EditTextView valueBinding="career"}}
             {{else}}
               {{career}}
             {{/if}}</td>
@@ -299,7 +299,7 @@
           <tr>
             <td class="fieldLabel col1">Gender</td>
             <td class="field col2">{{#if isEditing}}
-              {{view Ember.TextField valueBinding="gender"}}
+              {{view App.EditTextView valueBinding="gender"}}
             {{else}}
               {{gender}}
             {{/if}}</td>
@@ -307,7 +307,7 @@
           <tr>
             <td class="fieldLabel col1">Age</td>
             <td class="field col2">{{#if isEditing}}
-              {{view Ember.TextField valueBinding="age"}}
+              {{view App.EditTextView valueBinding="age"}}
             {{else}}
               {{age}}
             {{/if}}</td>
@@ -315,7 +315,7 @@
           <tr>
             <td class="fieldLabel col1">Height</td>
             <td class="field col2">{{#if isEditing}}
-              {{view Ember.TextField valueBinding="height"}}
+              {{view App.EditTextView valueBinding="height"}}
             {{else}}
               {{height}}cm
             {{/if}}</td>
@@ -327,7 +327,7 @@
           <tr>
             <td class="fieldLabel col1">Hair</td>
             <td class="field col2">{{#if isEditing}}
-              {{view Ember.TextField valueBinding="hair"}}
+              {{view App.EditTextView valueBinding="hair"}}
             {{else}}
               {{hair}}
             {{/if}}</td>
@@ -335,7 +335,7 @@
           <tr>
             <td class="fieldLabel col1">Eyes</td>
             <td class="field col2">{{#if isEditing}}
-              {{view Ember.TextField valueBinding="eyes"}}
+              {{view App.EditTextView valueBinding="eyes"}}
             {{else}}
               {{eyes}}
             {{/if}}</td>
@@ -343,7 +343,7 @@
           <tr>
             <td class="fieldLabel col1">Notable Features</td>
             <td class="field col2">{{#if isEditing}}
-              {{view Ember.TextField valueBinding="notableFeatures"}}
+              {{view App.EditTextView valueBinding="notableFeatures"}}
             {{else}}
               {{notableFeatures}}
             {{/if}}</td>
@@ -351,7 +351,7 @@
           <tr>
             <td class="fieldLabel col1">Build</td>
             <td class="field col2">{{#if isEditing}}
-              {{view Ember.TextField valueBinding="build"}}
+              {{view App.EditTextView valueBinding="build"}}
             {{else}}
               {{build}}
             {{/if}}</td>
@@ -359,7 +359,7 @@
           <tr>
             <td class="fieldLabel col1">Player</td>
             <td class="field col2">{{#if isEditing}}
-              {{view Ember.TextField valueBinding="playerName"}}
+              {{view App.EditTextView valueBinding="playerName"}}
             {{else}}
               {{playerName}}
             {{/if}}</td>
@@ -368,16 +368,16 @@
       </table>
       <div class="characterBadge inlineBlock">
         <img {{bindAttr src="portraitURL"}} alt="" class="">{{#if isEditing}}
-              {{view Ember.TextField valueBinding="name"}}
+              {{view App.EditTextView valueBinding="name"}}
             {{else}}<h1 class="">
               {{name}}
             </h1>{{/if}}
       </div>
     </header>
     {{#if isEditing}}
-      <a {{action 'saveCharacter'}}>[done]</a>
+      <button {{action 'saveCharacter'}}>[done]</button>
     {{else}}
-      <a {{action 'editCharacter'}}>[edit]</a> <a {{action 'deleteCharacter'}}>[delete]</a>
+      <button {{action 'editCharacter'}}>[edit]</button> <button {{action 'deleteCharacter'}}>[delete]</button>
     {{/if}}
 
     
@@ -403,61 +403,61 @@
   </script>
 
   <script type="text/x-handlebars" data-template-name="rank">
-    <tr><td class="col1">{{skill.name}}</td><td class="col2"> <a {{action 'adjustRank' -1}}>[-]</a>  <a {{action 'adjustRank' 1}}>[+]</a></td><td class="col3">{{rank.rank}}</td><td class="col4">{{dice dicePool}}</td></tr>
+    <tr><td class="col1">{{skill.name}}</td><td class="col2"> <button {{action 'adjustRank' -1}}>[-]</button>  <button {{action 'adjustRank' 1}}>[+]</button></td><td class="col3">{{rank.rank}}</td><td class="col4">{{dice dicePool}}</td></tr>
   </script>
 
   <script type="text/x-handlebars" data-template-name="weapon">
     <tr>
-      <td class="col1">{{#if isEditing}}{{view App.EditTextView valueBinding="name"}} <a {{action 'deleteItem'}}>[x]</a>{{else}}<a {{action "editItem" on="doubleClick"}}>{{name}}</a>{{/if}}</td>
-      <td class="col2">{{#if isEditing}}{{view App.EditTextView valueBinding="skill"}}{{else}}<a {{action "editItem" on="doubleClick"}}>{{skill}}</a>{{/if}}</td>
-      <td class="col3">{{#if isEditing}}{{view App.EditTextView valueBinding="damage"}}{{else}}<a {{action "editItem" on="doubleClick"}}>{{damage}}</a>{{/if}}</td>
-      <td class="col4">{{#if isEditing}}{{view App.EditTextView valueBinding="range"}}{{else}}<a {{action "editItem" on="doubleClick"}}>{{range}}</a>{{/if}}</td>
-      <td class="col5">{{#if isEditing}}{{view App.EditTextView valueBinding="crit"}}{{else}}<a {{action "editItem" on="doubleClick"}}>{{crit}}</a>{{/if}}</td> 
-      <td class="col6">{{#if isEditing}}{{view App.EditTextView valueBinding="special"}}{{else}}<a {{action "editItem" on="doubleClick"}}>{{special}}</a>{{/if}}</td>
+      <td class="col1">{{#if isEditing}}{{view App.EditTextView valueBinding="name"}} <button {{action 'deleteItem'}}>[x]</button>{{else}}<button {{action "editItem" on="doubleClick"}}>{{name}}</button>{{/if}}</td>
+      <td class="col2">{{#if isEditing}}{{view App.EditTextView valueBinding="skill"}}{{else}}<button {{action "editItem" on="doubleClick"}}>{{skill}}</button>{{/if}}</td>
+      <td class="col3">{{#if isEditing}}{{view App.EditTextView valueBinding="damage"}}{{else}}<button {{action "editItem" on="doubleClick"}}>{{damage}}</button>{{/if}}</td>
+      <td class="col4">{{#if isEditing}}{{view App.EditTextView valueBinding="range"}}{{else}}<button {{action "editItem" on="doubleClick"}}>{{range}}</button>{{/if}}</td>
+      <td class="col5">{{#if isEditing}}{{view App.EditTextView valueBinding="crit"}}{{else}}<button {{action "editItem" on="doubleClick"}}>{{crit}}</button>{{/if}}</td> 
+      <td class="col6">{{#if isEditing}}{{view App.EditTextView valueBinding="special"}}{{else}}<button {{action "editItem" on="doubleClick"}}>{{special}}</button>{{/if}}</td>
     </tr>
   </script>
 
   <script type="text/x-handlebars" data-template-name="armor">
     <tr>
-      <td class="itemName col1">{{#if isEditing}}{{view App.EditTextView valueBinding="name"}} <a {{action 'deleteItem'}}>[x]</a>{{else}}<a {{action "editItem" on="doubleClick"}}>{{name}}</a>{{/if}}</td>
-      <td class="armorStats col2">{{#if isEditing}}{{view App.EditTextView valueBinding="stats"}}{{else}}<a {{action "editItem" on="doubleClick"}}>{{stats}}</a>{{/if}}</td>
+      <td class="itemName col1">{{#if isEditing}}{{view App.EditTextView valueBinding="name"}} <button {{action 'deleteItem'}}>[x]</button>{{else}}<button {{action "editItem" on="doubleClick"}}>{{name}}</button>{{/if}}</td>
+      <td class="armorStats col2">{{#if isEditing}}{{view App.EditTextView valueBinding="stats"}}{{else}}<button {{action "editItem" on="doubleClick"}}>{{stats}}</button>{{/if}}</td>
     </tr>   
   </script>
 
   <script type="text/x-handlebars" data-template-name="inventoryItem">
     <tr>
-      <td class="itemName col1">{{#if isEditing}}{{view App.EditTextView valueBinding="name"}} <a {{action 'deleteItem'}}>[x]</a>{{else}}<a {{action "editItem" on="doubleClick"}}>{{name}}</a>{{/if}}</td>
-      <td class="itemStats col2">{{#if isEditing}}{{view App.EditTextView valueBinding="description"}} <a {{action 'deleteItem'}}>[x]</a>{{else}}<a {{action "editItem" on="doubleClick"}}>{{description}}</a>{{/if}}</td>
+      <td class="itemName col1">{{#if isEditing}}{{view App.EditTextView valueBinding="name"}} <button {{action 'deleteItem'}}>[x]</button>{{else}}<button {{action "editItem" on="doubleClick"}}>{{name}}</button>{{/if}}</td>
+      <td class="itemStats col2">{{#if isEditing}}{{view App.EditTextView valueBinding="description"}} <button {{action 'deleteItem'}}>[x]</button>{{else}}<button {{action "editItem" on="doubleClick"}}>{{description}}</button>{{/if}}</td>
     </tr>   
   </script>
 
   <script type="text/x-handlebars" data-template-name="criticalInjury">
     <tr>
-      <td class="col1">{{#if isEditing}}{{view App.EditTextView valueBinding="injury"}} <a {{action 'deleteItem'}}>[x]</a>{{else}}<a {{action "editItem" on="doubleClick"}}>{{injury}}</a>{{/if}}</td>
-      <td class="col2">{{#if isEditing}}{{view App.EditTextView valueBinding="severity"}} {{else}}<a {{action "editItem" on="doubleClick"}}>{{severity}}</a>{{/if}}</td>
-      <td class="col3">{{#if isEditing}}{{view App.EditTextView valueBinding="result"}} {{else}}<a {{action "editItem" on="doubleClick"}}>{{result}}</a>{{/if}}</td>
+      <td class="col1">{{#if isEditing}}{{view App.EditTextView valueBinding="injury"}} <button {{action 'deleteItem'}}>[x]</button>{{else}}<button {{action "editItem" on="doubleClick"}}>{{injury}}</button>{{/if}}</td>
+      <td class="col2">{{#if isEditing}}{{view App.EditTextView valueBinding="severity"}} {{else}}<button {{action "editItem" on="doubleClick"}}>{{severity}}</button>{{/if}}</td>
+      <td class="col3">{{#if isEditing}}{{view App.EditTextView valueBinding="result"}} {{else}}<button {{action "editItem" on="doubleClick"}}>{{result}}</button>{{/if}}</td>
     </tr>
   </script>
 
 <script type="text/x-handlebars" data-template-name="xp">
   <tr>
-    <td class="col1">{{#if isEditing}}{{view App.EditTextView valueBinding="source"}} <a {{action 'deleteItem'}}>[x]</a>{{else}}<a {{action "editItem" on="doubleClick"}}>{{source}}</a>{{/if}}</td>
-    <td class="col2">{{#if isEditing}}{{view App.EditTextView valueBinding="amount"}} {{else}}<a {{action "editItem" on="doubleClick"}}>{{amount}}</a>{{/if}}</td>
+    <td class="col1">{{#if isEditing}}{{view App.EditTextView valueBinding="source"}} <button {{action 'deleteItem'}}>[x]</button>{{else}}<button {{action "editItem" on="doubleClick"}}>{{source}}</button>{{/if}}</td>
+    <td class="col2">{{#if isEditing}}{{view App.EditTextView valueBinding="amount"}} {{else}}<button {{action "editItem" on="doubleClick"}}>{{amount}}</button>{{/if}}</td>
   </tr>
 </script>
 
 <script type="text/x-handlebars" data-template-name="motivation">
     <tr>
-      <td class="col1">{{#if isEditing}}{{view App.EditTextView valueBinding="motivation"}} <a {{action 'deleteItem'}}>[x]</a>{{else}}<a {{action "editItem" on="doubleClick"}}>{{motivation}}</a>{{/if}}</td>
-      <td class="col2">{{#if isEditing}}{{view App.EditTextView valueBinding="description"}} {{else}}<a {{action "editItem" on="doubleClick"}}>{{description}}</a>{{/if}}</td>
+      <td class="col1">{{#if isEditing}}{{view App.EditTextView valueBinding="motivation"}} <button {{action 'deleteItem'}}>[x]</button>{{else}}<button {{action "editItem" on="doubleClick"}}>{{motivation}}</button>{{/if}}</td>
+      <td class="col2">{{#if isEditing}}{{view App.EditTextView valueBinding="description"}} {{else}}<button {{action "editItem" on="doubleClick"}}>{{description}}</button>{{/if}}</td>
     </tr>
 </script>
 
 <script type="text/x-handlebars" data-template-name="obligation">
     <tr>
-      <td class="col1">{{#if isEditing}}{{view App.EditTextView valueBinding="type"}} <a {{action 'deleteItem'}}>[x]</a>{{else}}<a {{action "editItem" on="doubleClick"}}>{{type}}</a>{{/if}}</td>
-      <td class="col2">{{#if isEditing}}{{view App.EditTextView valueBinding="magnitude"}} {{else}}<a {{action "editItem" on="doubleClick"}}>{{magnitude}}</a>{{/if}}</td>
-      <td>{{#if isEditing}}{{view App.EditTextView valueBinding="details"}} {{else}}<a {{action "editItem" on="doubleClick"}}>{{details}}</a>{{/if}}</td>
+      <td class="col1">{{#if isEditing}}{{view App.EditTextView valueBinding="type"}} <button {{action 'deleteItem'}}>[x]</button>{{else}}<button {{action "editItem" on="doubleClick"}}>{{type}}</button>{{/if}}</td>
+      <td class="col2">{{#if isEditing}}{{view App.EditTextView valueBinding="magnitude"}} {{else}}<button {{action "editItem" on="doubleClick"}}>{{magnitude}}</button>{{/if}}</td>
+      <td>{{#if isEditing}}{{view App.EditTextView valueBinding="details"}} {{else}}<button {{action "editItem" on="doubleClick"}}>{{details}}</button>{{/if}}</td>
     </tr>
 </script>
 

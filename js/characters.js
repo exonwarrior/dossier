@@ -10,6 +10,7 @@ App.CharactersController = Ember.ArrayController.extend({
 	},
 	createCharacter: function(){
 		var character = App.Character.createRecord({
+			isEditing: true,
 			species: "<species>",
 			career: "<career>",
 			gender: "<gender>",
@@ -43,7 +44,8 @@ App.CharactersController = Ember.ArrayController.extend({
 			xp: [],
 			availableXP: 0,
 			motivation: [],
-			obligation: []
+			obligation: [],
+			soakMod: 0
 		});
 
 		character.save().then(function(record){

@@ -2,6 +2,14 @@ html, body{
 	font-family: advent-pro, sans-serif;
 }
 
+button{
+	background: none;
+	border: none;
+	padding: 0;
+	margin: 0;
+	color: inherit;
+}
+
 h1{
 	margin: 0 0 3px;
 	border-bottom: 2px solid #666;
@@ -29,10 +37,6 @@ img.die{
 .character{
 	width: 1024px;
 	margin: 0 auto;
-}
-
-.character.editing{
-	background: #fff0f0;
 }
 
 .characterList{
@@ -134,11 +138,11 @@ img.die{
 	font-weight: bold;
 }
 
-.character.editing .characterInfo table tr td.field {
+.character .characterInfo table tr td.field {
 	padding: 0;
 }
 
-.character.editing .characterInfo td.field input {
+.character .characterInfo td.field input.edit {
 	font-size: 16pt;
 	height: 100%;
 	text-align: right;
@@ -152,11 +156,11 @@ img.die{
 	font-weight: bold;
 }
 
-.character.editing .characterInfo .characterBadge input{
+.character .characterInfo .characterBadge input.edit{
 	position: absolute;
 	bottom: 0;
 	left: 0;
-	font-size: 28pt;
+	font-size: 18pt;
 	padding: 3px 0 10px;
 	color: #ddd;
 	font-weight: bold;
@@ -166,10 +170,10 @@ img.die{
 	text-align: center;
 }
 
-.character input{
+.character input.edit{
 	text-align: center;
 }
-.character .col1 input{
+.character .col1 input.edit{
 	text-align: left;
 	width: 60%;
 }
@@ -210,7 +214,7 @@ img.die{
 	line-height: 60px;
 }
 
-.character.editing .characterCharacteristics .characteristicBox .characteristicValue input{
+.character .characterCharacteristics .characteristicBox .characteristicValue input.edit{
 	width: 100%;
 	height: 100%;
 	border: 0;

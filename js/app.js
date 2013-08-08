@@ -18,10 +18,8 @@ App.Store = DS.Store.extend({
     this._super();
     var self = this;
     App.skillsArray.forEach(function(item, index){
-      console.log(item);
       var newSkill = App.Skill.createRecord(item);
       newSkill.save();
-      console.log(newSkill.get('id'));
     });
   }
 });
@@ -40,11 +38,25 @@ App.Store = DS.Store.extend({
   }
 }));*/
 
+
+
 App.EditTextView = Ember.TextField.extend({
   insertNewline: function () {
     console.log(this);
     this.get('controller').acceptChanges();
-  }
+  },
+  classNames: ["edit"],
+});
+
+App.CharacteristicView = Ember.TextField.extend({
+  type: 'number',
+  attributeBindings: ['min', 'max', 'step'],
+  keyUp: function(){
+    if(this.get('value') > 6){
+      this.set('value', 6);
+    }
+  },
+  classNames: ["edit"]
 });
 
 App.LSAdapter = DS.LSAdapter.extend({

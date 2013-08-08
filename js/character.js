@@ -8,6 +8,9 @@ App.CharacterController = Ember.ObjectController.extend({
 	editCharacter: function(){
 		this.set('isEditing', true);
 	},
+	acceptChanges: function(){
+		this.saveCharacter();
+	},
 	saveCharacter: function(){
 		this.set('isEditing', false);
 		this.get('model').save();
@@ -24,10 +27,9 @@ App.CharacterController = Ember.ObjectController.extend({
 	currentSoak: function(){
 		return parseInt(this.get('baseSoak')) + parseInt(this.get('soakMod'));
 	}.property('baseSoak', 'soakMod'),
-	soakMod: 0,
 	addToSoak: function(amount){
 		var newSoakMod = this.get('soakMod') + amount;
-		if(newSoakMod == 0){
+		if(newSoakMod === 0){
 			this.set('soakModded', false);
 		}
 		else if(newSoakMod < 0){
@@ -39,36 +41,42 @@ App.CharacterController = Ember.ObjectController.extend({
 			this.set('soakModdedPref', '+');
 		}
 		this.set('soakMod', newSoakMod);
+		try{this.get('model').save();}
+		catch(error){console.log(error.message);}
 	},
 	addDice: function(amount, type){
 		var current = this.get('boostSetbackDice');
 		var newCurrent = "";
-		if(amount > 0){
-			for(var i = 0; i < amount; i++){
-				//find the first instance of this letter
-				var index = current.indexOf(type);
-				if(index == -1){
-					index = 0;
+		if(parseInt(current.length) + amount <= 6){
+			if(amount > 0){
+				for(var i = 0; i < amount; i++){
+					//find the first instance of this letter
+					var index = current.indexOf(type);
+					if(index == -1){
+						index = 0;
+					}
+					//split the string into two parts, before that letter, and after that letter (including that letter)
+					var firstPart = current.substr(0, index);
+					var secondPart = current.substr(index);
+					//insert the new letter between
+					newCurrent = firstPart + type + secondPart;
 				}
-				//split the string into two parts, before that letter, and after that letter (including that letter)
-				var firstPart = current.substr(0, index);
-				var secondPart = current.substr(index);
-				//insert the new letter between
-				newCurrent = firstPart + type + secondPart;
 			}
-		}
-		else if(amount < 0){
-			for(var i = 0; i > amount; i--){
-				//find and replace one instance of the character
-				newCurrent = current.replace(new RegExp(type), '');
+			else if(amount < 0){
+				for(var i = 0; i > amount; i--){
+					//find and replace one instance of the character
+					newCurrent = current.replace(new RegExp(type), '');
+				}
 			}
+			this.set('boostSetbackDice', newCurrent);
+			this.get('model').save();
 		}
-		this.set('boostSetbackDice', newCurrent);
 	},
 	addToStat: function(stat, amount){
 		var current = this.get(stat);
 		var newValue = current + amount;
 		this.set(stat, newValue);
+		this.get('model').save();
 	},
 	createWeapon: function(){
 		var newWeapon = this.get('weapons').createRecord({
@@ -167,5 +175,8 @@ App.Character = DS.Model.extend({
   xp: DS.hasMany('App.Xp'),
   availableXP: DS.attr('number'),
   motivation: DS.hasMany('App.Motivation'),
-  obligation: DS.hasMany('App.Obligation')
+  obligation: DS.hasMany('App.Obligation'),
+  soakMod: DS.attr('number'),
+  soakModded: DS.attr('boolean'),
+  soakModdedPref: DS.attr('string')
 });
