@@ -7,12 +7,20 @@ App.CharacterController = Ember.ObjectController.extend({
 	}.property('xp.@each.amount'),
 	editCharacter: function(){
 		this.set('isEditing', true);
+		this.set('isEditingImageURL', true);
+	},
+	editImage: function(){
+		this.set('isEditingImageURL', true);
 	},
 	acceptChanges: function(){
 		this.saveCharacter();
 	},
 	saveCharacter: function(){
+		if(this.get('portraitURL') == "<portrait url>"){
+			this.set('portraitURL', "http://placekitten.com/200/200");
+		}
 		this.set('isEditing', false);
+		this.set('isEditingImageURL', false);
 		this.get('model').save();
 	},
 	deleteCharacter: function(){
@@ -138,6 +146,7 @@ App.CharacterController = Ember.ObjectController.extend({
 
 App.Character = DS.Model.extend({
   isEditing: DS.attr('boolean'),
+  editingImageURL: DS.attr('boolean'),
   species: DS.attr('string'),
   career: DS.attr('string'),
   gender: DS.attr('string'),

@@ -367,7 +367,7 @@
         </tbody>
       </table>
       <div class="characterBadge inlineBlock">
-        <img {{bindAttr src="portraitURL"}} alt="" class="">{{#if isEditing}}
+        {{#if isEditingImageURL}} {{view App.EditTextView class="editImageURL" valueBinding="portraitURL"}}{{else}}<img {{action "editImage" on="doubleClick"}} {{bindAttr src="portraitURL"}} alt="" class="">{{/if}}{{#if isEditing}}
               {{view App.EditTextView valueBinding="name"}}
             {{else}}<h1 class="">
               {{name}}

@@ -11,6 +11,7 @@ App.CharactersController = Ember.ArrayController.extend({
 	createCharacter: function(){
 		var character = App.Character.createRecord({
 			isEditing: true,
+			isEditingImageURL: true,
 			species: "<species>",
 			career: "<career>",
 			gender: "<gender>",
@@ -36,7 +37,7 @@ App.CharactersController = Ember.ArrayController.extend({
 			cunning: 1,
 			willpower: 1,
 			presence: 1,
-			portraitURL: "http://placekitten.com/200/200",
+			portraitURL: "<portrait url>",
 			inventory: [],
 			weapons: [],
 			armor: [],
