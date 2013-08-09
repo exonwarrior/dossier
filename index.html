@@ -5,7 +5,9 @@
 <title>Dossier</title>
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/fontello.css">
   <script src="//use.edgefonts.net/advent-pro.js"></script>
+  <meta name="viewport" content="width=device-width initial-scale=1.0, user-scalable=no">
 </head>
 <body>
   <script type="text/x-handlebars" data-template-name="application">
@@ -14,19 +16,23 @@
 
   <script type="text/x-handlebars" data-template-name="characters">
     <!--<span style="font-size: 7pt;">charactersTemplate</span><br>-->
-    <div class="characterList">
-      <h2>Characters</h2>
-      {{#each character in controller}}
-        {{#linkTo "character" character}}{{ character.name }}{{/linkTo}}<br>
-      {{/each}}
-      <button {{action 'createCharacter'}}>[Create New]</button>
+    <div class="charListContainer">
+      <div class="characterList">
+        <h2>Characters</h2>
+        <div class="characters">
+          {{#each character in controller}}
+            {{#linkTo "character" character}}{{ character.name }}{{/linkTo}}
+          {{/each}}
+          <button {{action 'createCharacter'}} class="icon-plus"></button>
+        </div>
+      </div>
     </div>
     {{ outlet }}
   </script>
 
   <script type="text/x-handlebars" data-template-name="character">
     <!--<span style="font-size: 7pt;">characterTemplate</span><br>-->
-    <div class="character" {{bindAttr class="isEditing:editing"}}>
+    <div class="character">
       {{partial "header"}}
       <div class="characterStats">
         {{partial currentStats}}     
@@ -91,32 +97,34 @@
           {{partial knowledgeSkills}}
         </div>
       </div>
-      <div class="characterWeapons">
-        <h1>Weapons <button {{action createWeapon}}>[+]</button></h1>
-        <div class="contentBlock">
-          <table class="">
-            <thead>
-              <tr>
-                <td class="col1">Weapon</td>
-                <td class="col2">Skill</td>
-                <td class="col3">Damage</td>
-                <td class="col4">Range</td>
-                <td class="col5">Crit</td>
-                <td class="col6">Special</td>
-              </tr>
-            </thead>
-            <tbody>
-              {{#each weapon in weapons}}
-                {{control "weapon" weapon}}
-              {{/each}}
-            </tbody>
-          </table>
+      <div class="characterWeaponsContainer">
+        <div class="characterWeapons">
+          <h1>Weapons <button {{action createWeapon}}>[+]</button></h1>
+          <div class="contentBlock col6">
+            <table class="">
+              <thead>
+                <tr>
+                  <td class="col1">Weapon</td>
+                  <td class="col2">Skill</td>
+                  <td class="col3">Damage</td>
+                  <td class="col4">Range</td>
+                  <td class="col5">Crit</td>
+                  <td class="col6">Special</td>
+                </tr>
+              </thead>
+              <tbody>
+                {{#each weapon in weapons}}
+                  {{control "weapon" weapon}}
+                {{/each}}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
       <div class="characterEquipment">
         <div class="characterArmor twoUp">
           <h1>Armor <button {{action 'createArmor'}}>[+]</button></h1>
-          <div class="contentBlock">
+          <div class="contentBlock col2">
             <table>
               <thead>
                 <tr>
@@ -134,7 +142,7 @@
         </div>
         <div class="characterInventory twoUp">
           <h1>Inventory <button {{action 'createInventoryItem'}}>[+]</button></h1>
-          <div class="contentBlock">
+          <div class="contentBlock col2">
             <table>
               <thead>
                 <tr>
@@ -154,7 +162,7 @@
       <div class="characterMiscInfo">
         <div class="characterCritInjuries twoUp">
           <h1>Critical Injuries <button {{action 'createCriticalInjury'}}>[+]</button></h1>
-          <div class="contentBlock">
+          <div class="contentBlock col3">
             <table>
               <thead>
                 <tr>
@@ -173,7 +181,7 @@
         </div>
         <div class="characterXP twoUp">
           <h1>XP <button {{action 'createXPItem'}}>[+]</button></h1>
-          <div class="contentBlock">
+          <div class="contentBlock col2">
             <table>
               <thead>
                 <tr>
@@ -209,7 +217,7 @@
         </div>
         <div class="characterObligation twoUp">
           <h1>Obligation <button {{action 'createObligation'}}>[+]</button></h1>
-          <div class="contentBlock">
+          <div class="contentBlock col3">
             <table>
               <thead>
                 <tr>
@@ -373,12 +381,13 @@
               {{name}}
             </h1>{{/if}}
       </div>
+      {{#if isEditing}}
+        <div class="editButtons"><button {{action 'saveCharacter'}} class="icon-ok"></button></div>
+      {{else}}
+        <div class="editButtons"><button {{action 'editCharacter'}} class="icon-pencil"></button> <button {{action 'deleteCharacter'}} class="icon-cancel"></button></div>
+      {{/if}}
     </header>
-    {{#if isEditing}}
-      <button {{action 'saveCharacter'}}>[done]</button>
-    {{else}}
-      <button {{action 'editCharacter'}}>[edit]</button> <button {{action 'deleteCharacter'}}>[delete]</button>
-    {{/if}}
+    
 
     
   </script>

@@ -2,12 +2,22 @@ html, body{
 	font-family: advent-pro, sans-serif;
 }
 
+*{
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: moz-none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
 button{
 	background: none;
 	border: none;
 	padding: 0;
 	margin: 0;
 	color: inherit;
+	font-weight: bold;
 }
 
 h1{
@@ -25,6 +35,39 @@ img.die{
 	margin: auto 3px;
 }
 
+header{
+	position: relative;
+}
+
+.editButtons{
+	font-size: 18pt;
+	color: #eee;
+	margin: 0;
+	position: absolute;
+	right: 10px;
+	bottom: -45px;
+}
+
+.editButtons button{
+	border-radius: 6px;
+	padding: 5px;
+	box-shadow: 0 -1px 0 0 rgba(0,0,0,0.6), 0 1px 1px 0 rgba(255,255,255,.5), 0 1px 0 0 rgba(255,255,255,.75) inset, 0 -1px 1px 0 rgba(0,0,0,0.8) inset;
+	
+}
+
+.icon-pencil, .icon-ok, .icon-plus{
+	background-color: #008800;
+	color: #eee;
+	border-radius: 2px;
+}
+
+.icon-cancel, .icon-minus{
+	background-color: #880000;
+	color: #eee;
+	border-radius: 2px;
+}
+
+
 .statBox img.die{
 	height: 24px;
 	box-shadow: 0 2px 5px 0 rgba(0,0,0,0.25);
@@ -40,12 +83,18 @@ img.die{
 }
 
 .characterList{
+	width: 1024px;
+	margin: 0 auto;	
+	position: relative;
+
+}
+
+.characterList h2{
 	position: absolute;
-	top: 350px;
-	left: 0;
-	background-color: #ccc;
-	padding: 5px;
-	border-radius: 0 10px 10px 0;
+	left: 10px;
+	top: 0;
+	color: #eee;
+	font-size: 22pt;
 }
 
 .characterList a{
@@ -55,9 +104,55 @@ img.die{
 	text-decoration: none;
 }
 
-.characterList .active{
-	background-color: #333;
+.charListContainer {
+	position: relative;
+	top: 0;
+	left: 0;
+	width: 100%;
+	padding: 0;
+	background-color: #af0000;
+	text-align: center;
+	position: relative;
+	background: #a90329; /* Old browsers */
+	background: #8e021a; /* Old browsers */
+	background: -moz-linear-gradient(top, #8e021a 0%, #a90329 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#8e021a), color-stop(100%,#a90329)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #8e021a 0%,#a90329 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #8e021a 0%,#a90329 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, #8e021a 0%,#a90329 100%); /* IE10+ */
+	background: linear-gradient(to bottom, #8e021a 0%,#a90329 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8e021a', endColorstr='#a90329',GradientType=0 ); /* IE6-9 */
+	box-shadow: 0 1px 0 0 rgba(0,0,0,0.5), 0 2px 0 0 rgba(255,255,255,0.4);
+	z-index: 100;
+}
+
+.characterList button, .characterList a{
+	padding:8px;
+	border-radius: 3px;
+	margin: 5px;
 	color: #eee;
+	background: #777777; /* Old browsers */
+	background: -moz-linear-gradient(top, #777777 0%, #5e5e5e 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#777777), color-stop(100%,#5e5e5e)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #777777 0%,#5e5e5e 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #777777 0%,#5e5e5e 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, #777777 0%,#5e5e5e 100%); /* IE10+ */
+	background: linear-gradient(to bottom, #777777 0%,#5e5e5e 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#777777', endColorstr='#5e5e5e',GradientType=0 ); /* IE6-9 */
+	box-shadow: 0 -1px 0 0 rgba(0,0,0,0.6), 0 1px 1px 0 rgba(255,255,255,.5), 0 1px 0 0 rgba(255,255,255,.75) inset, 0 -1px 1px 0 rgba(0,0,0,0.8) inset;
+	text-shadow: 0 -1px 0 rgba(0,0,0,.25);
+}
+
+.characterList a.active{
+	background: #fff;
+	color: #333;
+	box-shadow: 0 -1px 0 0 rgba(0,0,0,0.6), 0 0 2px 1px rgba(255,255,255,.5), 0 0 4px 2px rgba(255,50,50,1), 0 1px 0 0 rgba(255,255,255,.75) inset, 0 -1px 1px 0 rgba(0,0,0,0.8) inset, 0 0 10px 1px #ff5d00 inset;
+	text-shadow: 0 -1px 0 rgba(0,0,0,.25);
+}
+
+.characters{
+	display: inline-block;
+	text-align: center;
 }
 
 .character>div{
@@ -68,7 +163,6 @@ img.die{
 	width: 100%;
 	height: 200px;
 	border-radius: 0 0 30px 30px;
-	overflow: hidden;
 	text-align: left;
 	position: relative;
 	color: #eee;
@@ -128,8 +222,8 @@ img.die{
 }
 
 .characterInfo table tr td.fieldLabel{
-	width: 100%;
 	color: #aaa;
+	width: 70%
 }
 
 .characterInfo table tr td.field{
@@ -176,6 +270,8 @@ img.die{
 	position: absolute;
 	top: 0;
 	left: 0;
+	border: 1px solid #ccc;
+	height: 1em;
 }
 
 .character input.edit{
@@ -187,7 +283,7 @@ img.die{
 }
 
 .character div.twoUp{
-	width: calc(50% - 22px);
+	width: 47%;
 	display: inline-block;
 	vertical-align: top;
 	margin-bottom: 10px;
@@ -246,7 +342,7 @@ img.die{
 	padding: 5px;
 	border-radius: 10px;
 	border:2px solid #9e0017;
-	width: 80px;
+	width: 70%;
 }
 
 .characterStats{
@@ -261,7 +357,7 @@ img.die{
 	border-radius: 20px 20px;
 	overflow: hidden;
 	margin: 3px 0;
-	width: calc(20% - 6px);
+	width: 190px;
 }
 
 .statRow{
@@ -334,18 +430,27 @@ img.die{
 	color: #eee;
 }
 
-.characterEquipment{
+.characterEquipment, .characterMiscInfo{
 	display: inline-block;
 	vertical-align: top;
-	width: 1024px;
+	width: 100%;
+	text-align: center;
+}
+
+.characterWeaponsContainer{
+	margin-right: 10px;
+	text-align: center;
 }
 
 .characterWeapons{
-	margin-right: 10px;
+	display: inline-block;
+	width: 97%;
+	text-align: left;
 }
 
-.characterEquipment>div{
-	width: 470px;
+.characterEquipment>div, .characterMiscInfo>div{
+	width: 47%;
+	text-align: left;
 	display: inline-block;
 	margin-bottom: 20px;
 }
@@ -359,7 +464,6 @@ table{
 }
 
 table td.col1{
-	width: 75%;
 	text-align: left;
 }
 
@@ -374,7 +478,7 @@ table .col2{
 	
 }
 
-table>tbody>tr:hover td{
+table>tbody>tr:hover td, table>tbody>tr:active td{
 	background-color: #eee;
 	color: #333 !important;
 }
@@ -385,14 +489,38 @@ table tr td{
 	text-align: center;
 }
 
-.characterSkills>div{
-	width: calc(50% - 22px);
+.characterSkills > div{
+	width: 490px;
 	display: inline-block;
 	vertical-align: top;
 }
 
 .contentBlock{
-	margin: 0 10px;
+	margin: 0 9px;
+}
+
+.contentBlock.col2 td{
+	width: 50%;
+}
+
+.contentBlock.col3 td{
+	width: 33%;
+}
+
+.contentBlock.col4 td{
+	width: 25%;
+}
+
+.contentBlock.col5 td{
+	width: 20%;
+}
+
+.contentBlock.col6 td{
+	width: 16%;
+}
+
+.contentBlock input{
+	max-width: 80%;
 }
 
 .characterSkills table{
@@ -409,4 +537,54 @@ table tr td{
 
 .characterMiscInfo .col1{
 	width: 25%;
+}
+
+//Media queries
+
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) {
+
+
+}
+
+@media only screen 
+and (max-device-width : 768px) 
+{
+
+.characterList {
+	width: 100%;
+}
+
+.character{
+	width: 100%;
+}
+
+.characterInfo .characterBadge{
+	height: 100%;
+	width: 25%;
+}
+
+.characterInfo table{
+	width: 32%;
+
+}
+
+.character>div.characterCharacteristics{
+	width: 60%;
+	margin: 0 auto;
+}
+
+.characterSkills{
+	margin: 0 auto;
+	text-align: center;
+	font-size: 1.4em;
+}
+
+.characterSkills > div {
+	width: 95%;
+	margin: 0 auto;
+
+}
+
 }
