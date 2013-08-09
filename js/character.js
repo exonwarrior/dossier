@@ -123,7 +123,7 @@ App.CharacterController = Ember.ObjectController.extend({
 		var newXPItem = this.get('xp').createRecord({
 			isEditing: true,
 			source: "<source>",
-			amount: "<amount>"
+			amount: "0"
 		});
 	},
 	createMotivation: function(){
@@ -145,7 +145,6 @@ App.CharacterController = Ember.ObjectController.extend({
 
 
 App.Character = DS.Model.extend({
-  isEditing: DS.attr('boolean'),
   editingImageURL: DS.attr('boolean'),
   species: DS.attr('string'),
   career: DS.attr('string'),
