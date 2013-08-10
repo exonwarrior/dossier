@@ -7,3 +7,5 @@ App.InventoryItem = DS.Model.extend({
 App.InventoryItemController = App.ItemController.extend({
 	
 });
+
+App.register('controller:inventoryitem', App.InventoryItemController, {singleton: false});

@@ -7,3 +7,5 @@ App.Armor = DS.Model.extend({
 App.ArmorController = App.ItemController.extend({
 	
 });
+
+App.register('controller:armor', App.ArmorController, {singleton: false});

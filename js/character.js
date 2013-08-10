@@ -96,6 +96,7 @@ App.CharacterController = Ember.ObjectController.extend({
 			special: "<special>",
 			skill: "<skill>"
 		});
+		console.log(newWeapon.get('id'));
 	},
 	createArmor: function(){
 		var newArmor = this.get('armor').createRecord({
@@ -105,7 +106,8 @@ App.CharacterController = Ember.ObjectController.extend({
 		});
 	},
 	createInventoryItem: function(){
-		var newItem = this.get('item').createRecord({
+		console.log("HI");
+		var newItem = this.get('inventory').createRecord({
 			isEditing: true,
 			name: "<name>",
 			description: "<description>"

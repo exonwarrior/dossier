@@ -151,7 +151,7 @@
                 </tr>
               </thead>
               <tbody>
-                {{#each item in inventoryItem}}
+                {{#each item in inventory}}
                   {{control "inventoryItem" item}}
                 {{/each}}
               </tbody>
@@ -193,7 +193,7 @@
                 {{#each xpItem in xp}}
                   {{control "xp" xpItem}}
                 {{/each}}
-                 <tr>
+                 <tr class="total">
                   <td class="col1"><strong>Total XP</strong></td>
                   <td class="col2"><strong>{{totalXP}}</strong></td> 
                 </tr>
@@ -418,7 +418,7 @@
   <script type="text/x-handlebars" data-template-name="weapon">
     <tr>
       <td class="col1">{{#if isEditing}}{{view App.EditTextView valueBinding="name"}} <button {{action 'deleteItem'}}>[x]</button>{{else}}<button {{action "editItem" on="doubleClick"}}>{{name}}</button>{{/if}}</td>
-      <td class="col2">{{#if isEditing}}{{view App.EditTextView valueBinding="skill"}}{{else}}<button {{action "editItem" on="doubleClick"}}>{{skill}}</button>{{/if}}</td>
+      <td class="col2">{{#if isEditing}}{{view App.EditTextView valueBinding="id"}}{{else}}<button {{action "editItem" on="doubleClick"}}>{{id}}</button>{{/if}}</td>
       <td class="col3">{{#if isEditing}}{{view App.EditTextView valueBinding="damage"}}{{else}}<button {{action "editItem" on="doubleClick"}}>{{damage}}</button>{{/if}}</td>
       <td class="col4">{{#if isEditing}}{{view App.EditTextView valueBinding="range"}}{{else}}<button {{action "editItem" on="doubleClick"}}>{{range}}</button>{{/if}}</td>
       <td class="col5">{{#if isEditing}}{{view App.EditTextView valueBinding="crit"}}{{else}}<button {{action "editItem" on="doubleClick"}}>{{crit}}</button>{{/if}}</td> 

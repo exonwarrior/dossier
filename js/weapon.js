@@ -12,3 +12,5 @@ App.Weapon = DS.Model.extend({
 App.WeaponController = App.ItemController.extend({
 	
 });
+
+App.register('controller:weapon', App.WeaponController, {singleton: false});

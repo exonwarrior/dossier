@@ -8,3 +8,5 @@ App.Obligation = DS.Model.extend({
 App.ObligationController = App.ItemController.extend({
 	
 });
+
+App.register('controller:obligation', App.ObligationController, {singleton: false});

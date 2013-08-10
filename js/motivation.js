@@ -8,3 +8,5 @@ App.Motivation = DS.Model.extend({
 App.MotivationController = App.ItemController.extend({
 	
 });
+
+App.register('controller:motivation', App.MotivationController, {singleton: false});

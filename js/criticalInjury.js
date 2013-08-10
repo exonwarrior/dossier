@@ -9,3 +9,5 @@ App.Criticalinjury = DS.Model.extend({
 App.CriticalInjuryController = App.ItemController.extend({
 	
 });
+
+App.register('controller:criticalinjury', App.CriticalInjuryController, {singleton: false});

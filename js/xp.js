@@ -8,3 +8,5 @@ App.Xp = DS.Model.extend({
 App.XpController = App.ItemController.extend({
 	
 });
+
+App.register('controller:xp', App.XpController, {singleton: false});
