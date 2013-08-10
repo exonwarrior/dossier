@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/fontello.css">
   <script src="//use.edgefonts.net/advent-pro.js"></script>
+  <script src="//use.edgefonts.net/architects-daughter.js"></script>
   <meta name="viewport" content="width=device-width initial-scale=1.0, user-scalable=no">
 </head>
 <body>
@@ -21,7 +22,7 @@
         <h2>Characters</h2>
         <div class="characters">
           {{#each character in controller}}
-            {{#linkTo "character" character}}{{ character.name }}{{/linkTo}}
+            {{#linkTo "character" character}}<img {{bindAttr src="character.portraitURL"}} ><span class="characterName">{{ character.name }}</span>{{/linkTo}}
           {{/each}}
           <button {{action 'createCharacter'}} class="icon-plus"></button>
         </div>
@@ -242,7 +243,7 @@
     <h1>Current Stats</h1>
     <div class="statBox dual">
       <div class="row statRow">
-        <div class="statLeft current">{{woundsCurrent}}<div class="statBoxLabel"><button {{action 'addToStat' "woundsCurrent" -1}}>[-]</button> Current <button {{action 'addToStat' "woundsCurrent" 1}}>[+]</button></div></div><div class="statRight threshold">{{woundsThreshold}}<div class="statBoxLabel"><button {{action 'addToStat' "woundsThreshold" -1}}>[-]</button> Threshold <button {{action 'addToStat' "woundsThreshold" 1}}>[+]</button></div></div>
+        <div class="statLeft current"><span class="statValue">{{woundsCurrent}}</span><div class="statBoxLabel"><button {{action 'addToStat' "woundsCurrent" -1}}>[-]</button> Current <button {{action 'addToStat' "woundsCurrent" 1}}>[+]</button></div></div><div class="statRight threshold"><span class="statValue">{{woundsThreshold}}</span><div class="statBoxLabel"><button {{action 'addToStat' "woundsThreshold" -1}}>[-]</button> Threshold <button {{action 'addToStat' "woundsThreshold" 1}}>[+]</button></div></div>
       </div>
       <div class="statRow bottom">
         <div class="statLabel">Wounds</div>
@@ -250,7 +251,7 @@
     </div>
     <div class="statBox dual">
       <div class="row statRow">
-        <div class="statLeft current">{{strainCurrent}}<div class="statBoxLabel"><button {{action 'addToStat' "strainCurrent" -1}}>[-]</button> Current <button {{action 'addToStat' "strainCurrent" 1}}>[+]</button></div></div><div class="statRight threshold">{{strainThreshold}}<div class="statBoxLabel"><button {{action 'addToStat' "strainThreshold" -1}}>[-]</button> Threshold <button {{action 'addToStat' "strainThreshold" 1}}>[+]</button></div></div>
+        <div class="statLeft current"><span class="statValue">{{strainCurrent}}</span><div class="statBoxLabel"><button {{action 'addToStat' "strainCurrent" -1}}>[-]</button> Current <button {{action 'addToStat' "strainCurrent" 1}}>[+]</button></div></div><div class="statRight threshold"><span class="statValue">{{strainThreshold}}</span><div class="statBoxLabel"><button {{action 'addToStat' "strainThreshold" -1}}>[-]</button> Threshold <button {{action 'addToStat' "strainThreshold" 1}}>[+]</button></div></div>
       </div>
       <div class="statRow bottom">
         <div class="statLabel">Strain</div>
@@ -258,7 +259,7 @@
     </div>
     <div class="statBox dual">
       <div class="row statRow">
-        <div class="statLeft ranged">{{defenseRanged}}<div class="statBoxLabel"><button {{action 'addToStat' "defenseRanged" -1}}>[-]</button> Ranged <button {{action 'addToStat' "defenseRanged" 1}}>[+]</button></div></div><div class="statRight melee">{{defenseMelee}}<div class="statBoxLabel"><button {{action 'addToStat' "defenseMelee" -1}}>[-]</button> Melee <button {{action 'addToStat' "defenseMelee" 1}}>[+]</button></div></div>
+        <div class="statLeft ranged"><span class="statValue">{{defenseRanged}}</span><div class="statBoxLabel"><button {{action 'addToStat' "defenseRanged" -1}}>[-]</button> Ranged <button {{action 'addToStat' "defenseRanged" 1}}>[+]</button></div></div><div class="statRight melee"><span class="statValue">{{defenseMelee}}</span><div class="statBoxLabel"><button {{action 'addToStat' "defenseMelee" -1}}>[-]</button> Melee <button {{action 'addToStat' "defenseMelee" 1}}>[+]</button></div></div>
       </div>
       <div class="statRow bottom">
         <div class="statLabel">Defense</div>
@@ -266,7 +267,7 @@
     </div>
     <div class="statBox solo">
       <div class="row statRow">
-        <div class="statLeft">{{currentSoak}}<div class="statBoxLabel">{{#if soakModded}}( {{soakModdedPref}}{{soakMod}} ){{else}}&nbsp;{{/if}}</div></div>
+        <div class="statSolo"><span class="statValue">{{currentSoak}}</span><div class="statBoxLabel">{{#if soakModded}}( {{soakModdedPref}}{{soakMod}} ){{else}}&nbsp;{{/if}}</div></div>
       </div>
       <div class="statRow bottom">
         <div class="statLabel"><button {{action 'addToSoak' -1}}>[-]</button> Soak <button {{action 'addToSoak' 1}}>[+]</button></div>
@@ -274,7 +275,7 @@
     </div>
     <div class="statBox solo">
       <div class="row statRow">
-        <div class="statLeft">{{#if boostSetbackDice}}{{dice boostSetbackDice}}{{else}}&nbsp;{{/if}}<div class="statBoxLabel">&nbsp;</div></div>
+        <div class="statSolo">{{#if boostSetbackDice}}{{dice boostSetbackDice}}{{else}}<span class="statValue">&nbsp;</span>{{/if}}<div class="statBoxLabel">&nbsp;</div></div>
       </div>
       <div class="statRow bottom">
         <div class="statLabel"><span class="boostDice"><button {{action 'addDice' -1 "b"}}>[-]</button> <button {{action 'addDice' 1 "b"}}>[+]</button></span> Boost/Setback <span class="setbackDice"><button {{action 'addDice' -1 "s"}}>[-]</button> <button {{action 'addDice' 1 "s"}}>[+]</button></span> </div>
@@ -284,103 +285,54 @@
 
   <script type="text/x-handlebars" data-template-name="_header">
     <header class="characterInfo">
-      <table class="inlineBlock">
-        <tbody>
-          <tr>
-            <td class="fieldLabel col1">Species</td>
-            <td class="field col2">
-            {{#if isEditing}}
-              {{view App.EditTextView valueBinding="species"}}
-            {{else}}
-              {{species}}
-            {{/if}}
-            </td>
-          </tr>
-          <tr>
-            <td class="fieldLabel col1">Career</td>
-            <td class="field col2">{{#if isEditing}}
-              {{view App.EditTextView valueBinding="career"}}
-            {{else}}
-              {{career}}
-            {{/if}}</td>
-          </tr>
-          <tr>
-            <td class="fieldLabel col1">Gender</td>
-            <td class="field col2">{{#if isEditing}}
-              {{view App.EditTextView valueBinding="gender"}}
-            {{else}}
-              {{gender}}
-            {{/if}}</td>
-          </tr>
-          <tr>
-            <td class="fieldLabel col1">Age</td>
-            <td class="field col2">{{#if isEditing}}
-              {{view App.EditTextView valueBinding="age"}}
-            {{else}}
-              {{age}}
-            {{/if}}</td>
-          </tr>
-          <tr>
-            <td class="fieldLabel col1">Height</td>
-            <td class="field col2">{{#if isEditing}}
-              {{view App.EditTextView valueBinding="height"}}
-            {{else}}
-              {{height}}cm
-            {{/if}}</td>
-          </tr>
-        </tbody>
-      </table>
-      <table class="inlineBlock">
-        <tbody>
-          <tr>
-            <td class="fieldLabel col1">Hair</td>
-            <td class="field col2">{{#if isEditing}}
-              {{view App.EditTextView valueBinding="hair"}}
-            {{else}}
-              {{hair}}
-            {{/if}}</td>
-          </tr>
-          <tr>
-            <td class="fieldLabel col1">Eyes</td>
-            <td class="field col2">{{#if isEditing}}
-              {{view App.EditTextView valueBinding="eyes"}}
-            {{else}}
-              {{eyes}}
-            {{/if}}</td>
-          </tr>
-          <tr>
-            <td class="fieldLabel col1">Notable Features</td>
-            <td class="field col2">{{#if isEditing}}
-              {{view App.EditTextView valueBinding="notableFeatures"}}
-            {{else}}
-              {{notableFeatures}}
-            {{/if}}</td>
-          </tr>
-          <tr>
-            <td class="fieldLabel col1">Build</td>
-            <td class="field col2">{{#if isEditing}}
-              {{view App.EditTextView valueBinding="build"}}
-            {{else}}
-              {{build}}
-            {{/if}}</td>
-          </tr>
-          <tr>
-            <td class="fieldLabel col1">Player</td>
-            <td class="field col2">{{#if isEditing}}
-              {{view App.EditTextView valueBinding="playerName"}}
-            {{else}}
-              {{playerName}}
-            {{/if}}</td>
-          </tr>
-        </tbody>
-      </table>
-      <div class="characterBadge inlineBlock">
-        {{#if isEditingImageURL}} {{view App.EditTextView class="editImageURL" valueBinding="portraitURL"}}{{else}}<img {{action "editImage" on="doubleClick"}} {{bindAttr src="portraitURL"}} alt="" class="">{{/if}}{{#if isEditing}}
+        <div class="characterBadge floatRight">
+        {{#if isEditingImageURL}} {{view App.EditTextView class="editImageURL" valueBinding="portraitURL"}}{{else}}<img {{action "editImage" on="doubleClick"}} {{bindAttr src="portraitURL"}} alt="" class="characterPortrait">{{/if}}{{#if isEditing}}
               {{view App.EditTextView valueBinding="name"}}
-            {{else}}<h1 class="">
-              {{name}}
-            </h1>{{/if}}
-      </div>
+            {{else}}
+            <h1 class="">{{name}}</h1>
+            {{/if}}
+        </div>
+
+        <div class="inlineBlock infoBlock charName">
+          <div class="fieldLabel">Name</div>
+          <div class="field">{{#if isEditing}}{{view App.EditTextView valueBinding="name"}}{{else}}{{name}}{{/if}}</div>
+        </div>
+        <div class="inlineBlock infoBlock">
+          <div class="fieldLabel">Species</div>
+          <div class="field">{{#if isEditing}}{{view App.EditTextView valueBinding="species"}}{{else}}{{species}}{{/if}}</div>
+        </div>
+        <div class="inlineBlock infoBlock">
+          <div class="fieldLabel">Hair</div>
+          <div class="field">{{#if isEditing}}{{view App.EditTextView valueBinding="hair"}}{{else}}{{hair}}{{/if}}</div>
+        </div>
+        <div class="inlineBlock infoBlock">
+          <div class="fieldLabel">Career</div>
+          <div class="field">{{#if isEditing}}{{view App.EditTextView valueBinding="career"}}{{else}}{{career}}{{/if}}</div>
+        </div>
+        <div class="inlineBlock infoBlock">
+          <div class="fieldLabel">Eyes</div>
+          <div class="field">{{#if isEditing}}{{view App.EditTextView valueBinding="eyes"}}{{else}}{{eyes}}{{/if}}</div>
+        </div>
+        <div class="inlineBlock infoBlock">
+          <div class="fieldLabel">Gender</div>
+          <div class="field">{{#if isEditing}}{{view App.EditTextView valueBinding="gender"}}{{else}}{{gender}}{{/if}}</div>
+        </div>
+        <div class="inlineBlock infoBlock">
+          <div class="fieldLabel">Notable Features</div>
+          <div class="field">{{#if isEditing}}{{view App.EditTextView valueBinding="notableFeatures"}}{{else}}{{notableFeatures}}{{/if}}</div>
+        </div>
+        <div class="inlineBlock infoBlock">
+          <div class="fieldLabel">Age</div>
+          <div class="field">{{#if isEditing}}{{view App.EditTextView valueBinding="age"}}{{else}}{{age}}{{/if}}</div>
+        </div>
+        <div class="inlineBlock infoBlock">
+          <div class="fieldLabel">Build</div>
+          <div class="field">{{#if isEditing}}{{view App.EditTextView valueBinding="build"}}{{else}}{{build}}{{/if}}</div>
+        </div>
+        <div class="inlineBlock infoBlock">
+          <div class="fieldLabel">Height</div>
+          <div class="field">{{#if isEditing}}{{view App.EditTextView valueBinding="height"}}{{else}}{{height}}cm{{/if}}</div>
+        </div>
       {{#if isEditing}}
         <div class="editButtons"><button {{action 'saveCharacter'}} class="icon-ok"></button></div>
       {{else}}

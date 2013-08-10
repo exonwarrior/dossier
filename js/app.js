@@ -60,7 +60,7 @@ App.CharacteristicView = Ember.TextField.extend({
 });
 
 App.LSAdapter = DS.LSAdapter.extend({
-  namespace: 'dossie-emberjs'
+  namespace: 'dossier-emberjs'
 });
 
 
