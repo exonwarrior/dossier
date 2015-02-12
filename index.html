@@ -384,231 +384,416 @@
 		</script> 
 
 		<script type="text/x-handlebars" data-template-name="_header">
-		<header class="characterInfo">
-		<table class="inlineBlock">
-		<tbody>
-		<tr>
-		<td class="fieldLabel col1">Species</td>
-		<td class="field col2">
-		{{#if isEditing}}
-		{{view App.EditTextView valueBinding="species"}}
-		{{else}}
-		{{species}}
-		{{/if}}
-		</td>
-		</tr>
-		<tr>
-		<td class="fieldLabel col1">Career</td>
-		<td class="field col2">{{#if isEditing}}
-		{{view App.EditTextView valueBinding="career"}}
-		{{else}}
-		{{career}}
-		{{/if}}</td>
-		</tr>
-		<tr>
-		<td class="fieldLabel col1">Gender</td>
-		<td class="field col2">{{#if isEditing}}
-		{{view App.EditTextView valueBinding="gender"}}
-		{{else}}
-		{{gender}}
-		{{/if}}</td>
-		</tr>
-		<tr>
-		<td class="fieldLabel col1">Age</td>
-		<td class="field col2">{{#if isEditing}}
-		{{view App.EditTextView valueBinding="age"}}
-		{{else}}
-		{{age}}
-		{{/if}}</td>
-		</tr>
-		<tr>
-		<td class="fieldLabel col1">Height</td>
-		<td class="field col2">{{#if isEditing}}
-		{{view App.EditTextView valueBinding="height"}}
-		{{else}}
-		{{height}}cm
-		{{/if}}</td>
-		</tr>
-		</tbody>
-		</table>
-		<table class="inlineBlock">
-		<tbody>
-		<tr>
-		<td class="fieldLabel col1">Hair</td>
-		<td class="field col2">{{#if isEditing}}
-		{{view App.EditTextView valueBinding="hair"}}
-		{{else}}
-		{{hair}}
-		{{/if}}</td>
-		</tr>
-		<tr>
-		<td class="fieldLabel col1">Eyes</td>
-		<td class="field col2">{{#if isEditing}}
-		{{view App.EditTextView valueBinding="eyes"}}
-		{{else}}
-		{{eyes}}
-		{{/if}}</td>
-		</tr>
-		<tr>
-		<td class="fieldLabel col1">Notable Features</td>
-		<td class="field col2">{{#if isEditing}}
-		{{view App.EditTextView valueBinding="notableFeatures"}}
-		{{else}}
-		{{notableFeatures}}
-		{{/if}}</td>
-		</tr>
-		<tr>
-		<td class="fieldLabel col1">Build</td>
-		<td class="field col2">{{#if isEditing}}
-		{{view App.EditTextView valueBinding="build"}}
-		{{else}}
-		{{build}}
-		{{/if}}</td>
-		</tr>
-		<tr>
-		<td class="fieldLabel col1">Player</td>
-		<td class="field col2">{{#if isEditing}}
-		{{view App.EditTextView valueBinding="playerName"}}
-		{{else}}
-		{{playerName}}
-		{{/if}}</td>
-		</tr>
-		</tbody>
-		</table>
-		<div class="characterBadge inlineBlock">
-		{{#if isEditingImageURL}} {{view App.EditTextView class="editImageURL" valueBinding="portraitURL"}}{{else}}<img {{action "editImage" on="doubleClick"}} {{bindAttr src="portraitURL"}} alt="" class="">{{/if}}{{#if isEditing}}
-		{{view App.EditTextView valueBinding="name"}}
-		{{else}}<h1 class="">
-		{{name}}
-		</h1>{{/if}}
-		</div>
-		{{#if isEditing}}
-		<div class="editButtons"><button {{action 'saveCharacter'}} class="icon-ok"></button></div>
-		{{else}}
-		<div class="editButtons"><button {{action 'editCharacter'}} class="icon-pencil"></button> <button {{action 'deleteCharacter'}} class="icon-cancel"></button></div>
-		{{/if}}
-		</header>
-
-
-
+			<header class="characterInfo">
+				<table class="inlineBlock">
+					<tbody>
+						<tr>
+							<td class="fieldLabel col1">
+								Species
+							</td>
+							<td class="field col2">
+								{{#if isEditing}}
+									{{view App.EditTextView valueBinding="species"}}
+								{{else}}
+									{{species}}
+								{{/if}}
+							</td>
+						</tr>
+						<tr>
+							<td class="fieldLabel col1">
+								Career
+							</td>
+							<td class="field col2">
+								{{#if isEditing}}
+									{{view App.EditTextView valueBinding="career"}}
+								{{else}}
+									{{career}}
+								{{/if}}
+							</td>
+						</tr>
+						<tr>
+							<td class="fieldLabel col1">
+								Gender
+							</td>
+							<td class="field col2">
+								{{#if isEditing}}
+									{{view App.EditTextView valueBinding="gender"}}
+								{{else}}
+									{{gender}}
+								{{/if}}
+							</td>
+						</tr>
+						<tr>
+							<td class="fieldLabel col1">
+								Age
+							</td>
+							<td class="field col2">
+								{{#if isEditing}}
+									{{view App.EditTextView valueBinding="age"}}
+								{{else}}
+									{{age}}
+								{{/if}}
+							</td>
+						</tr>
+						<tr>
+							<td class="fieldLabel col1">
+								Height
+							</td>
+							<td class="field col2">
+								{{#if isEditing}}
+									{{view App.EditTextView valueBinding="height"}}
+								{{else}}
+									{{height}}cm
+								{{/if}}
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<table class="inlineBlock">
+					<tbody>
+						<tr>
+							<td class="fieldLabel col1">
+								Hair
+							</td>
+							<td class="field col2">
+								{{#if isEditing}}
+									{{view App.EditTextView valueBinding="hair"}}
+								{{else}}
+									{{hair}}
+								{{/if}}
+							</td>
+						</tr>
+						<tr>
+							<td class="fieldLabel col1">
+								Eyes
+							</td>
+							<td class="field col2">
+								{{#if isEditing}}
+									{{view App.EditTextView valueBinding="eyes"}}
+								{{else}}
+									{{eyes}}
+								{{/if}}
+							</td>
+						</tr>
+						<tr>
+							<td class="fieldLabel col1">
+								Notable Features
+							</td>
+							<td class="field col2">
+								{{#if isEditing}}
+									{{view App.EditTextView valueBinding="notableFeatures"}}
+								{{else}}
+									{{notableFeatures}}
+								{{/if}}
+							</td>
+						</tr>
+						<tr>
+							<td class="fieldLabel col1">
+								Build
+							</td>
+							<td class="field col2">
+								{{#if isEditing}}
+									{{view App.EditTextView valueBinding="build"}}
+								{{else}}
+									{{build}}
+								{{/if}}
+							</td>
+						</tr>
+						<tr>
+							<td class="fieldLabel col1">
+								Player
+							</td>
+							<td class="field col2">
+								{{#if isEditing}}
+									{{view App.EditTextView valueBinding="playerName"}}
+								{{else}}
+									{{playerName}}
+								{{/if}}
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="characterBadge inlineBlock">
+					{{#if isEditingImageURL}}
+						{{view App.EditTextView class="editImageURL" valueBinding="portraitURL"}}
+					{{else}}
+						<img {{action "editImage" on="doubleClick"}} {{bindAttr src="portraitURL"}} alt="" class="">
+					{{/if}}
+					{{#if isEditing}}
+						{{view App.EditTextView valueBinding="name"}}
+					{{else}}
+						<h1 class="">
+						{{name}}
+						</h1>
+					{{/if}}
+				</div>
+					{{#if isEditing}}
+						<div class="editButtons">
+							<button {{action 'saveCharacter'}} class="icon-ok">
+							</button>
+						</div>
+					{{else}}
+						<div class="editButtons">
+							<button {{action 'editCharacter'}} class="icon-pencil">
+							</button>
+							<button {{action 'deleteCharacter'}} class="icon-cancel">
+							</button>
+						</div>
+					{{/if}}
+			</header>
 		</script>
 
 		<script type="text/x-handlebars" data-template-name="_generalSkills">
-		<h2>General Skills</h2>
-		<table class="">
-		<thead>
-		<tr>
-		<td class="col1">Skill</td>
-		<td class="col2 adjustRank"></td>
-		<td class="col3">Rank</td>
-		<td class="col4">Dice Pool</td>
-		</tr>
-		</thead>
-		<tbody>
-		{{#each rank in generalSkills}}
-		{{control "rank" rank}}
-		{{/each}}
-		</tbody>
-		</table>
+			<h2>General Skills</h2>
+			<table class="">
+				<thead>
+					<tr>
+						<td class="col1">Skill</td>
+						<td class="col2 adjustRank"></td>
+						<td class="col3">Rank</td>
+						<td class="col4">Dice Pool</td>
+					</tr>
+				</thead>
+				<tbody>
+					{{#each rank in generalSkills}}
+					{{control "rank" rank}}
+					{{/each}}
+				</tbody>
+			</table>
 		</script>
 
 		<script type="text/x-handlebars" data-template-name="rank">
-		<tr><td class="col1">{{skill.name}}</td><td class="col2"> <button {{action 'adjustRank' -1}}>[-]</button>  <button {{action 'adjustRank' 1}}>[+]</button></td><td class="col3">{{rank.rank}}</td><td class="col4">{{dice dicePool}}</td></tr>
+			<tr>
+				<td class="col1">{{skill.name}}</td>
+				<td class="col2">
+					<button {{action 'adjustRank' -1}}>[-]</button>
+					<button {{action 'adjustRank' 1}}>[+]</button>
+				</td>
+				<td class="col3">{{rank.rank}}</td>
+				<td class="col4">{{dice dicePool}}</td>
+			</tr>
 		</script>
 
 		<script type="text/x-handlebars" data-template-name="weapon">
-		<tr>
-		<td class="col1">{{#if isEditing}}{{view App.EditTextView valueBinding="name"}} <button {{action 'deleteItem'}}>[x]</button>{{else}}<button {{action "editItem" on="doubleClick"}}>{{name}}</button>{{/if}}</td>
-		<td class="col2">{{#if isEditing}}{{view App.EditTextView valueBinding="id"}}{{else}}<button {{action "editItem" on="doubleClick"}}>{{id}}</button>{{/if}}</td>
-		<td class="col3">{{#if isEditing}}{{view App.EditTextView valueBinding="damage"}}{{else}}<button {{action "editItem" on="doubleClick"}}>{{damage}}</button>{{/if}}</td>
-		<td class="col4">{{#if isEditing}}{{view App.EditTextView valueBinding="range"}}{{else}}<button {{action "editItem" on="doubleClick"}}>{{range}}</button>{{/if}}</td>
-		<td class="col5">{{#if isEditing}}{{view App.EditTextView valueBinding="crit"}}{{else}}<button {{action "editItem" on="doubleClick"}}>{{crit}}</button>{{/if}}</td> 
-		<td class="col6">{{#if isEditing}}{{view App.EditTextView valueBinding="special"}}{{else}}<button {{action "editItem" on="doubleClick"}}>{{special}}</button>{{/if}}</td>
-		</tr>
+			<tr>
+				<td class="col1">
+					{{#if isEditing}}
+						{{view App.EditTextView valueBinding="name"}}
+						<button {{action 'deleteItem'}}>[x]</button>
+					{{else}}
+						<button {{action "editItem" on="doubleClick"}}>{{name}}</button>
+					{{/if}}
+				</td>
+				<td class="col2">
+					{{#if isEditing}}
+						{{view App.EditTextView valueBinding="id"}}
+					{{else}}
+						<button {{action "editItem" on="doubleClick"}}>{{id}}</button>
+					{{/if}}
+				</td>
+				<td class="col3">
+					{{#if isEditing}}
+						{{view App.EditTextView valueBinding="damage"}}
+					{{else}}
+						<button {{action "editItem" on="doubleClick"}}>{{damage}}</button>
+					{{/if}}
+				</td>
+				<td class="col4">
+					{{#if isEditing}}
+						{{view App.EditTextView valueBinding="range"}}
+					{{else}}
+						<button {{action "editItem" on="doubleClick"}}>{{range}}</button>
+					{{/if}}
+				</td>
+				<td class="col5">
+					{{#if isEditing}}
+						{{view App.EditTextView valueBinding="crit"}}
+					{{else}}
+						<button {{action "editItem" on="doubleClick"}}>{{crit}}</button>
+					{{/if}}
+				</td> 
+				<td class="col6">
+					{{#if isEditing}}
+						{{view App.EditTextView valueBinding="special"}}
+					{{else}}
+						<button {{action "editItem" on="doubleClick"}}>{{special}}</button>
+					{{/if}}
+				</td>
+			</tr>
 		</script>
 
 		<script type="text/x-handlebars" data-template-name="armor">
-		<tr>
-		<td class="itemName col1">{{#if isEditing}}{{view App.EditTextView valueBinding="name"}} <button {{action 'deleteItem'}}>[x]</button>{{else}}<button {{action "editItem" on="doubleClick"}}>{{name}}</button>{{/if}}</td>
-		<td class="armorStats col2">{{#if isEditing}}{{view App.EditTextView valueBinding="stats"}}{{else}}<button {{action "editItem" on="doubleClick"}}>{{stats}}</button>{{/if}}</td>
-		</tr>   
+			<tr>
+				<td class="itemName col1">
+					{{#if isEditing}}
+						{{view App.EditTextView valueBinding="name"}} 
+						<button {{action 'deleteItem'}}>[x]</button>
+					{{else}}
+						<button {{action "editItem" on="doubleClick"}}>{{name}}</button>
+					{{/if}}
+				</td>
+				<td class="armorStats col2">
+					{{#if isEditing}}
+						{{view App.EditTextView valueBinding="stats"}}
+					{{else}}
+						<button {{action "editItem" on="doubleClick"}}>{{stats}}</button>
+					{{/if}}
+				</td>
+			</tr>   
 		</script>
 
 		<script type="text/x-handlebars" data-template-name="inventoryItem">
-		<tr>
-		<td class="itemName col1">{{#if isEditing}}{{view App.EditTextView valueBinding="name"}} <button {{action 'deleteItem'}}>[x]</button>{{else}}<button {{action "editItem" on="doubleClick"}}>{{name}}</button>{{/if}}</td>
-		<td class="itemStats col2">{{#if isEditing}}{{view App.EditTextView valueBinding="description"}} <button {{action 'deleteItem'}}>[x]</button>{{else}}<button {{action "editItem" on="doubleClick"}}>{{description}}</button>{{/if}}</td>
-		</tr>   
+			<tr>
+				<td class="itemName col1">
+					{{#if isEditing}}{{view App.EditTextView valueBinding="name"}}
+						<button {{action 'deleteItem'}}>[x]</button>
+					{{else}}
+						<button {{action "editItem" on="doubleClick"}}>{{name}}</button>
+					{{/if}}
+				</td>
+				<td class="itemStats col2">
+					{{#if isEditing}}
+						{{view App.EditTextView valueBinding="description"}}
+						<button {{action 'deleteItem'}}>[x]</button>
+					{{else}}
+						<button {{action "editItem" on="doubleClick"}}>{{description}}</button>
+					{{/if}}
+				</td>
+			</tr>   
 		</script>
 
 		<script type="text/x-handlebars" data-template-name="criticalInjury">
-		<tr>
-		<td class="col1">{{#if isEditing}}{{view App.EditTextView valueBinding="injury"}} <button {{action 'deleteItem'}}>[x]</button>{{else}}<button {{action "editItem" on="doubleClick"}}>{{injury}}</button>{{/if}}</td>
-		<td class="col2">{{#if isEditing}}{{view App.EditTextView valueBinding="severity"}} {{else}}<button {{action "editItem" on="doubleClick"}}>{{severity}}</button>{{/if}}</td>
-		<td class="col3">{{#if isEditing}}{{view App.EditTextView valueBinding="result"}} {{else}}<button {{action "editItem" on="doubleClick"}}>{{result}}</button>{{/if}}</td>
-		</tr>
+			<tr>
+				<td class="col1">
+					{{#if isEditing}}
+						{{view App.EditTextView valueBinding="injury"}} 
+						<button {{action 'deleteItem'}}>[x]</button>
+					{{else}}
+						<button {{action "editItem" on="doubleClick"}}>{{injury}}</button>
+					{{/if}}
+				</td>
+				<td class="col2">
+					{{#if isEditing}}
+						{{view App.EditTextView valueBinding="severity"}}
+					{{else}}
+						<button {{action "editItem" on="doubleClick"}}>{{severity}}</button>
+					{{/if}}
+				</td>
+				<td class="col3">
+					{{#if isEditing}}
+						{{view App.EditTextView valueBinding="result"}}
+					{{else}}
+						<button {{action "editItem" on="doubleClick"}}>{{result}}</button>
+					{{/if}}
+				</td>
+			</tr>
 		</script>
 
 		<script type="text/x-handlebars" data-template-name="xp">
-		<tr>
-		<td class="col1">{{#if isEditing}}{{view App.EditTextView valueBinding="source"}} <button {{action 'deleteItem'}}>[x]</button>{{else}}<button {{action "editItem" on="doubleClick"}}>{{source}}</button>{{/if}}</td>
-		<td class="col2">{{#if isEditing}}{{view App.EditTextView valueBinding="amount"}} {{else}}<button {{action "editItem" on="doubleClick"}}>{{amount}}</button>{{/if}}</td>
-		</tr>
+			<tr>
+				<td class="col1">
+					{{#if isEditing}}
+						{{view App.EditTextView valueBinding="source"}}
+						<button {{action 'deleteItem'}}>[x]</button>
+					{{else}}
+						<button {{action "editItem" on="doubleClick"}}>{{source}}</button>
+					{{/if}}
+				</td>
+				<td class="col2">
+					{{#if isEditing}}
+						{{view App.EditTextView valueBinding="amount"}}
+					{{else}}
+						<button {{action "editItem" on="doubleClick"}}>{{amount}}</button>
+					{{/if}}
+				</td>
+			</tr>
 		</script>
 
 		<script type="text/x-handlebars" data-template-name="motivation">
-		<tr>
-		<td class="col1">{{#if isEditing}}{{view App.EditTextView valueBinding="motivation"}} <button {{action 'deleteItem'}}>[x]</button>{{else}}<button {{action "editItem" on="doubleClick"}}>{{motivation}}</button>{{/if}}</td>
-		<td class="col2">{{#if isEditing}}{{view App.EditTextView valueBinding="description"}} {{else}}<button {{action "editItem" on="doubleClick"}}>{{description}}</button>{{/if}}</td>
-		</tr>
+			<tr>
+				<td class="col1">
+					{{#if isEditing}}
+						{{view App.EditTextView valueBinding="motivation"}}
+						<button {{action 'deleteItem'}}>[x]</button>
+					{{else}}
+						<button {{action "editItem" on="doubleClick"}}>{{motivation}}</button>
+					{{/if}}
+				</td>
+				<td class="col2">
+					{{#if isEditing}}
+						{{view App.EditTextView valueBinding="description"}}
+					{{else}}
+						<button {{action "editItem" on="doubleClick"}}>{{description}}</button>
+					{{/if}}
+				</td>
+			</tr>
 		</script>
 
 		<script type="text/x-handlebars" data-template-name="obligation">
-		<tr>
-		<td class="col1">{{#if isEditing}}{{view App.EditTextView valueBinding="type"}} <button {{action 'deleteItem'}}>[x]</button>{{else}}<button {{action "editItem" on="doubleClick"}}>{{type}}</button>{{/if}}</td>
-		<td class="col2">{{#if isEditing}}{{view App.EditTextView valueBinding="magnitude"}} {{else}}<button {{action "editItem" on="doubleClick"}}>{{magnitude}}</button>{{/if}}</td>
-		<td>{{#if isEditing}}{{view App.EditTextView valueBinding="details"}} {{else}}<button {{action "editItem" on="doubleClick"}}>{{details}}</button>{{/if}}</td>
-		</tr>
+			<tr>
+				<td class="col1">
+					{{#if isEditing}}
+						{{view App.EditTextView valueBinding="type"}}
+						<button {{action 'deleteItem'}}>[x]</button>
+					{{else}}
+						<button {{action "editItem" on="doubleClick"}}>{{type}}</button>
+					{{/if}}
+				</td>
+				<td class="col2">
+					{{#if isEditing}}
+						{{view App.EditTextView valueBinding="magnitude"}}
+					{{else}}
+						<button {{action "editItem" on="doubleClick"}}>{{magnitude}}</button>
+					{{/if}}
+				</td>
+				<td>
+					{{#if isEditing}}
+						{{view App.EditTextView valueBinding="details"}}
+					{{else}}
+						<button {{action "editItem" on="doubleClick"}}>{{details}}</button>
+					{{/if}}
+				</td>
+			</tr>
 		</script>
 
 
 
 		<script type="text/x-handlebars" data-template-name="_combatSkills">
-		<h2>Combat Skills</h2>
-		<table class="">
-		<thead>
-		<tr>
-		<td class="col1">Skill</td>
-		<td class="col2 adjustRank"></td>
-		<td class="col3">Rank</td>
-		<td class="col4">Dice Pool</td>
-		</tr>
-		</thead>
-		<tbody>
-		{{#each rank in combatSkills}}
-		{{control "rank" rank}}
-		{{/each}}
-		</tbody>
-		</table>
+			<h2>Combat Skills</h2>
+			<table class="">
+				<thead>
+					<tr>
+						<td class="col1">Skill</td>
+						<td class="col2 adjustRank"></td>
+						<td class="col3">Rank</td>
+						<td class="col4">Dice Pool</td>
+					</tr>
+				</thead>
+				<tbody>
+					{{#each rank in combatSkills}}
+					{{control "rank" rank}}
+					{{/each}}
+				</tbody>
+			</table>
 		</script>
 		
 		<script type="text/x-handlebars" data-template-name="_knowledgeSkills">
-		<h2>Knowledge Skills</h2>
-		<table class="">
-		<thead>
-		<tr>
-		<td class="col1">Skill</td>
-		<td class="col2 adjustRank"></td>
-		<td class="col3">Rank</td>
-		<td class="col4">Dice Pool</td>
-		</tr>
-		</thead>
-		<tbody>
-		{{#each rank in knowledgeSkills}}
-		{{control "rank" rank}}
-		{{/each}}
-		</tbody>
-		</table>
+			<h2>Knowledge Skills</h2>
+			<table class="">
+				<thead>
+					<tr>
+						<td class="col1">Skill</td>
+						<td class="col2 adjustRank"></td>
+						<td class="col3">Rank</td>
+						<td class="col4">Dice Pool</td>
+					</tr>
+				</thead>
+				<tbody>
+					{{#each rank in knowledgeSkills}}
+					{{control "rank" rank}}
+					{{/each}}
+				</tbody>
+			</table>
 		<!--<h2>Custom Skills [+]</h2>
 		<table class="">
 		<thead>
@@ -644,9 +829,9 @@
 		-->
 		
 		<script type='application/javascript'>
-		ENV = {
-		EXPERIMENTAL_CONTROL_HELPER: true
-		};
+			ENV = {
+				EXPERIMENTAL_CONTROL_HELPER: true
+			};
 		</script>
 		
 		<script src="js/libs/jquery-1.9.1.js"></script>
