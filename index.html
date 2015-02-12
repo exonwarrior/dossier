@@ -578,7 +578,7 @@
 			<tr>
 				<td class="col1">
 					{{#if isEditing}}
-						<button {{action 'deleteItem'}}>[x]</button>
+						<!--<button {{action 'deleteItem'}}>[x]</button>-->
 						{{view App.EditTextView valueBinding="name"}}
 					{{else}}
 						<button {{action "editItem" on="doubleClick"}}>{{name}}</button>
