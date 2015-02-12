@@ -578,8 +578,8 @@
 			<tr>
 				<td class="col1">
 					{{#if isEditing}}
-						{{view App.EditTextView valueBinding="name"}}
 						<button {{action 'deleteItem'}}>[x]</button>
+						{{view App.EditTextView valueBinding="name"}}
 					{{else}}
 						<button {{action "editItem" on="doubleClick"}}>{{name}}</button>
 					{{/if}}
@@ -587,6 +587,7 @@
 				<td class="col2">
 					{{#if isEditing}}
 						{{view App.EditTextView valueBinding="id"}}
+						<button {{action 'deleteItem'}}>[x]</button>
 					{{else}}
 						<button {{action "editItem" on="doubleClick"}}>{{id}}</button>
 					{{/if}}
@@ -594,6 +595,7 @@
 				<td class="col3">
 					{{#if isEditing}}
 						{{view App.EditTextView valueBinding="damage"}}
+						<button {{action 'deleteItem'}}>[x]</button>
 					{{else}}
 						<button {{action "editItem" on="doubleClick"}}>{{damage}}</button>
 					{{/if}}
@@ -601,6 +603,7 @@
 				<td class="col4">
 					{{#if isEditing}}
 						{{view App.EditTextView valueBinding="range"}}
+						<button {{action 'deleteItem'}}>[x]</button>
 					{{else}}
 						<button {{action "editItem" on="doubleClick"}}>{{range}}</button>
 					{{/if}}
@@ -608,6 +611,7 @@
 				<td class="col5">
 					{{#if isEditing}}
 						{{view App.EditTextView valueBinding="crit"}}
+						<button {{action 'deleteItem'}}>[x]</button>
 					{{else}}
 						<button {{action "editItem" on="doubleClick"}}>{{crit}}</button>
 					{{/if}}
@@ -615,6 +619,7 @@
 				<td class="col6">
 					{{#if isEditing}}
 						{{view App.EditTextView valueBinding="special"}}
+						<button {{action 'deleteItem'}}>[x]</button>
 					{{else}}
 						<button {{action "editItem" on="doubleClick"}}>{{special}}</button>
 					{{/if}}
@@ -635,6 +640,7 @@
 				<td class="armorStats col2">
 					{{#if isEditing}}
 						{{view App.EditTextView valueBinding="stats"}}
+						<button {{action 'deleteItem'}}>[x]</button>
 					{{else}}
 						<button {{action "editItem" on="doubleClick"}}>{{stats}}</button>
 					{{/if}}
